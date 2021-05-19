@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ndefi\\Downloads\\win\\Windows-universal-samples-master (1)\\Windows-universal-samples-master\\Samples\\BluetoothLE\\cs\\BluetoothLE.csproj": {}
+    "C:\\Users\\ndefi\\Coding\\BluetoothHRacq\\BluetoothLE\\cs\\BluetoothLE.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ndefi\\Downloads\\win\\Windows-universal-samples-master (1)\\Windows-universal-samples-master\\Samples\\BluetoothLE\\cs\\BluetoothLE.csproj": {
+    "C:\\Users\\ndefi\\Coding\\BluetoothHRacq\\BluetoothLE\\cs\\BluetoothLE.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ndefi\\Downloads\\win\\Windows-universal-samples-master (1)\\Windows-universal-samples-master\\Samples\\BluetoothLE\\cs\\BluetoothLE.csproj",
+        "projectUniqueName": "C:\\Users\\ndefi\\Coding\\BluetoothHRacq\\BluetoothLE\\cs\\BluetoothLE.csproj",
         "projectName": "BluetoothLE",
-        "projectPath": "C:\\Users\\ndefi\\Downloads\\win\\Windows-universal-samples-master (1)\\Windows-universal-samples-master\\Samples\\BluetoothLE\\cs\\BluetoothLE.csproj",
+        "projectPath": "C:\\Users\\ndefi\\Coding\\BluetoothHRacq\\BluetoothLE\\cs\\BluetoothLE.csproj",
         "packagesPath": "C:\\Users\\ndefi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ndefi\\Downloads\\win\\Windows-universal-samples-master (1)\\Windows-universal-samples-master\\Samples\\BluetoothLE\\cs\\obj\\",
+        "outputPath": "C:\\Users\\ndefi\\Coding\\BluetoothHRacq\\BluetoothLE\\cs\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "fallbackFolders": [

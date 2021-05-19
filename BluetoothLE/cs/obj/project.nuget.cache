@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ALQvlaJoPF73fn08rXI3pcLgQ2ivn9LM5/ThJjUO2UEWSHPC2oge6mNF0sII2yb1j1cI2asaZ5NDTqx6N5aD7A==",
+  "dgSpecHash": "SrMZoek43Sh1bRXI826EK8e850BbFPFmm/uG4+ay1/RnggsxeBI4IfhMmu5XpGXe6wed9lA9acoQRd5DfDq/FA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ndefi\\Downloads\\win\\Windows-universal-samples-master (1)\\Windows-universal-samples-master\\Samples\\BluetoothLE\\cs\\BluetoothLE.csproj",
+  "projectFilePath": "C:\\Users\\ndefi\\Coding\\BluetoothHRacq\\BluetoothLE\\cs\\BluetoothLE.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ndefi\\.nuget\\packages\\microsoft.csharp\\4.0.0\\microsoft.csharp.4.0.0.nupkg.sha512",
     "C:\\Users\\ndefi\\.nuget\\packages\\microsoft.netcore\\5.0.0\\microsoft.netcore.5.0.0.nupkg.sha512",

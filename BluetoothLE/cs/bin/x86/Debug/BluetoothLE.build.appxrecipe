@@ -10,22 +10,22 @@
     <PackageArchitecture>x86</PackageArchitecture>
     <PackageIdentityName>a2214a83-6d31-41dd-b75f-0b8e56be182d</PackageIdentityName>
     <PackageIdentityPublisher>CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US</PackageIdentityPublisher>
-    <IntermediateOutputPath>C:\Users\ndefi\Downloads\win\Windows-universal-samples-master %281%29\Windows-universal-samples-master\Samples\BluetoothLE\cs\obj\x86\Debug\</IntermediateOutputPath>
+    <IntermediateOutputPath>C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\obj\x86\Debug\</IntermediateOutputPath>
     <RemoteDeploymentType></RemoteDeploymentType>
     <PackageRegistrationPath></PackageRegistrationPath>
     <RemoveNonLayoutFiles>true</RemoveNonLayoutFiles>
     <DeployOptionalPackages>false</DeployOptionalPackages>
     <WindowsSdkPath>C:\Program Files %28x86%29\Windows Kits\10\</WindowsSdkPath>
-    <LayoutDir>C:\Users\ndefi\Downloads\win\Windows-universal-samples-master %281%29\Windows-universal-samples-master\Samples\BluetoothLE\cs\bin\x86\Debug\AppX</LayoutDir>
+    <LayoutDir>C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\bin\x86\Debug\AppX</LayoutDir>
   </PropertyGroup>
   <ItemGroup>
-    <AppXManifest Include="C:\Users\ndefi\Downloads\win\Windows-universal-samples-master %281%29\Windows-universal-samples-master\Samples\BluetoothLE\cs\bin\x86\Debug\Core\AppxManifest.xml">
+    <AppXManifest Include="C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
-    <AppxPackagedFile Include="C:\Users\ndefi\Downloads\win\Windows-universal-samples-master %281%29\Windows-universal-samples-master\Samples\BluetoothLE\cs\bin\x86\Debug\BluetoothLEUniversal.exe">
+    <AppxPackagedFile Include="C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\bin\x86\Debug\BluetoothLEUniversal.exe">
       <PackagePath>entrypoint\BluetoothLEUniversal.exe</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ndefi\.nuget\packages\microsoft.csharp\4.0.0\lib\netcore50\Microsoft.CSharp.dll">
@@ -340,62 +340,62 @@
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\bin\10.0.18362.0\XamlCompiler\Microsoft.UI.Xaml.Markup.winmd">
       <PackagePath>Microsoft.UI.Xaml.Markup.winmd</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\ndefi\Downloads\win\Windows-universal-samples-master %281%29\Windows-universal-samples-master\SharedContent\cs\Default.rd.xml">
+    <AppxPackagedFile Include="C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\Default.rd.xml">
       <PackagePath>Properties\Default.rd.xml</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\ndefi\Downloads\win\Windows-universal-samples-master %281%29\Windows-universal-samples-master\SharedContent\media\microsoft-sdk.png">
+    <AppxPackagedFile Include="C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\microsoft-sdk.png">
       <PackagePath>Assets\microsoft-sdk.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\ndefi\Downloads\win\Windows-universal-samples-master %281%29\Windows-universal-samples-master\SharedContent\media\smalltile-sdk.png">
+    <AppxPackagedFile Include="C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\smalltile-sdk.png">
       <PackagePath>Assets\smallTile-sdk.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\ndefi\Downloads\win\Windows-universal-samples-master %281%29\Windows-universal-samples-master\SharedContent\media\splash-sdk.png">
+    <AppxPackagedFile Include="C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\splash-sdk.png">
       <PackagePath>Assets\splash-sdk.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\ndefi\Downloads\win\Windows-universal-samples-master %281%29\Windows-universal-samples-master\SharedContent\media\squaretile-sdk.png">
+    <AppxPackagedFile Include="C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\squaretile-sdk.png">
       <PackagePath>Assets\squareTile-sdk.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\ndefi\Downloads\win\Windows-universal-samples-master %281%29\Windows-universal-samples-master\SharedContent\media\storelogo-sdk.png">
+    <AppxPackagedFile Include="C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\storelogo-sdk.png">
       <PackagePath>Assets\storeLogo-sdk.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\ndefi\Downloads\win\Windows-universal-samples-master %281%29\Windows-universal-samples-master\SharedContent\media\tile-sdk.png">
+    <AppxPackagedFile Include="C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\tile-sdk.png">
       <PackagePath>Assets\tile-sdk.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\ndefi\Downloads\win\Windows-universal-samples-master %281%29\Windows-universal-samples-master\SharedContent\media\windows-sdk.png">
+    <AppxPackagedFile Include="C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\windows-sdk.png">
       <PackagePath>Assets\windows-sdk.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\ndefi\Downloads\win\Windows-universal-samples-master %281%29\Windows-universal-samples-master\Samples\BluetoothLE\cs\bin\x86\Debug\BluetoothLEUniversal.xr.xml">
+    <AppxPackagedFile Include="C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\bin\x86\Debug\BluetoothLEUniversal.xr.xml">
       <PackagePath>BluetoothLEUniversal.xr.xml</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\ndefi\Downloads\win\Windows-universal-samples-master %281%29\Windows-universal-samples-master\Samples\BluetoothLE\cs\bin\x86\Debug\App.xbf">
+    <AppxPackagedFile Include="C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\bin\x86\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\ndefi\Downloads\win\Windows-universal-samples-master %281%29\Windows-universal-samples-master\Samples\BluetoothLE\cs\bin\x86\Debug\MainPage.xbf">
-      <PackagePath>MainPage.xbf</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\ndefi\Downloads\win\Windows-universal-samples-master %281%29\Windows-universal-samples-master\Samples\BluetoothLE\cs\bin\x86\Debug\Scenario1_Discovery.xbf">
+    <AppxPackagedFile Include="C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\bin\x86\Debug\Scenario1_Discovery.xbf">
       <PackagePath>Scenario1_Discovery.xbf</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\ndefi\Downloads\win\Windows-universal-samples-master %281%29\Windows-universal-samples-master\Samples\BluetoothLE\cs\bin\x86\Debug\Styles\Styles.xbf">
+    <AppxPackagedFile Include="C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\bin\x86\Debug\Styles\Styles.xbf">
       <PackagePath>Styles\Styles.xbf</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\ndefi\Downloads\win\Windows-universal-samples-master %281%29\Windows-universal-samples-master\Samples\BluetoothLE\cs\bin\x86\Debug\Scenario3_ServerForeground.xbf">
+    <AppxPackagedFile Include="C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\bin\x86\Debug\Scenario3_ServerForeground.xbf">
       <PackagePath>Scenario3_ServerForeground.xbf</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\ndefi\Downloads\win\Windows-universal-samples-master %281%29\Windows-universal-samples-master\Samples\BluetoothLE\cs\bin\x86\Debug\Scenario2_Client.xbf">
+    <AppxPackagedFile Include="C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\bin\x86\Debug\Scenario2_Client.xbf">
       <PackagePath>Scenario2_Client.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\bin\x86\Debug\MainPage.xbf">
+      <PackagePath>MainPage.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\10.0.18362.0\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\ndefi\Downloads\win\Windows-universal-samples-master %281%29\Windows-universal-samples-master\Samples\BluetoothLE\cs\bin\x86\Debug\resources.pri">
+    <AppxPackagedFile Include="C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\ndefi\Downloads\win\Windows-universal-samples-master %281%29\Windows-universal-samples-master\Samples\BluetoothLE\cs\bin\x86\Debug\Core\BluetoothLEUniversal.exe">
+    <AppxPackagedFile Include="C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\bin\x86\Debug\Core\BluetoothLEUniversal.exe">
       <PackagePath>BluetoothLEUniversal.exe</PackagePath>
     </AppxPackagedFile>
   </ItemGroup>

@@ -91,15 +91,15 @@
     <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(SharedContentDir)\cs\App.xaml.cs">
+    <Compile Include="App.xaml.cs">
       <Link>App.xaml.cs</Link>
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(SharedContentDir)\cs\MainPage.xaml.cs">
+    <Compile Include="MainPage.xaml.cs">
       <Link>MainPage.xaml.cs</Link>
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(SharedContentDir)\cs\AssemblyInfo.cs">
+    <Compile Include="AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Constants.cs" />
@@ -122,13 +122,12 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="$(SharedContentDir)\xaml\App.xaml">
+    <ApplicationDefinition Include="App.xaml">
       <Link>App.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="$(SharedContentDir)\cs\MainPage.xaml">
-      <Link>MainPage.xaml</Link>
+    <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -137,7 +136,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="$(SharedContentDir)\xaml\Styles.xaml">
+    <Page Include="Styles.xaml">
       <Link>Styles\Styles.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -154,28 +153,28 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="$(SharedContentDir)\cs\Default.rd.xml">
+    <Content Include="Default.rd.xml">
       <Link>Properties\Default.rd.xml</Link>
     </Content>
-    <Content Include="$(SharedContentDir)\media\microsoft-sdk.png">
+    <Content Include="microsoft-sdk.png">
       <Link>Assets\microsoft-sdk.png</Link>
     </Content>
-    <Content Include="$(SharedContentDir)\media\smalltile-sdk.png">
+    <Content Include="smalltile-sdk.png">
       <Link>Assets\smallTile-sdk.png</Link>
     </Content>
-    <Content Include="$(SharedContentDir)\media\splash-sdk.png">
+    <Content Include="splash-sdk.png">
       <Link>Assets\splash-sdk.png</Link>
     </Content>
-    <Content Include="$(SharedContentDir)\media\squaretile-sdk.png">
+    <Content Include="squaretile-sdk.png">
       <Link>Assets\squareTile-sdk.png</Link>
     </Content>
-    <Content Include="$(SharedContentDir)\media\storelogo-sdk.png">
+    <Content Include="storelogo-sdk.png">
       <Link>Assets\storeLogo-sdk.png</Link>
     </Content>
-    <Content Include="$(SharedContentDir)\media\tile-sdk.png">
+    <Content Include="tile-sdk.png">
       <Link>Assets\tile-sdk.png</Link>
     </Content>
-    <Content Include="$(SharedContentDir)\media\windows-sdk.png">
+    <Content Include="windows-sdk.png">
       <Link>Assets\windows-sdk.png</Link>
     </Content>
   </ItemGroup>
