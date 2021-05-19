@@ -1,0 +1,1 @@
+C:\Users\ndefi\Downloads\win\Windows-universal-samples-master (1)\Windows-universal-samples-master\Samples\BluetoothLE\cs\BluetoothLE.csproj;x86
