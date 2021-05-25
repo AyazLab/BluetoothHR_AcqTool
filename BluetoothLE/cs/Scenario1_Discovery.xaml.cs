@@ -59,19 +59,18 @@ namespace SDKTemplate
             if (deviceWatcher == null)
             {
                 StartBleDeviceWatcher();
-                EnumerateButton.Content = "Stop enumerating";
+                EnumerateButton.Content = "Stop scan";
                 rootPage.NotifyUser($"Device watcher started.", NotifyType.StatusMessage);
             }
             else
             {
                 StopBleDeviceWatcher();
-                EnumerateButton.Content = "Start enumerating";
+                EnumerateButton.Content = "Start scan";
                 rootPage.NotifyUser($"Device watcher stopped.", NotifyType.StatusMessage);
             }
         }
 
-        private bool Not(bool value) => !value;
-
+        private bool IsNotNull(object value) => (value != null);
         #endregion
 
         #region Device discovery
@@ -285,34 +284,9 @@ namespace SDKTemplate
 
         #region Pairing
 
-        private bool isBusy = false;
-
-        private async void PairButton_Click()
+        private void ConnectButton_Click()
         {
-            // Do not allow a new Pair operation to start if an existing one is in progress.
-            if (isBusy)
-            {
-                return;
-            }
-
-            isBusy = true;
-
-            rootPage.NotifyUser("Pairing started. Please wait...", NotifyType.StatusMessage);
-
-            // For more information about device pairing, including examples of
-            // customizing the pairing process, see the DeviceEnumerationAndPairing sample.
-
-            // Capture the current selected item in case the user changes it while we are pairing.
-            var bleDeviceDisplay = ResultsListView.SelectedItem as BluetoothLEDeviceDisplay;
-
-            // BT_Code: Pair the currently selected device.
-            DevicePairingResult result = await bleDeviceDisplay.DeviceInformation.Pairing.PairAsync();
-            rootPage.NotifyUser($"Pairing result = {result.Status}",
-                result.Status == DevicePairingResultStatus.Paired || result.Status == DevicePairingResultStatus.AlreadyPaired
-                    ? NotifyType.StatusMessage
-                    : NotifyType.ErrorMessage);
-
-            isBusy = false;
+            Frame.Navigate(typeof(Scenario2_Client));
         }
 
         #endregion

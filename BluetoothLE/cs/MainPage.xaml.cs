@@ -37,7 +37,6 @@ namespace SDKTemplate
             // This is a static public property that allows downstream pages to get a handle to the MainPage instance
             // in order to call methods that are in this class.
             Current = this;
-            SampleTitle.Text = FEATURE_NAME;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -45,20 +44,7 @@ namespace SDKTemplate
             // Populate the scenario list from the SampleConfiguration.cs file
             var itemCollection = new List<Scenario>();
             int i = 1;
-            foreach (Scenario s in scenarios)
-            {
-                itemCollection.Add(new Scenario { Title = $"{i++}) {s.Title}", ClassType = s.ClassType });
-            }
-            ScenarioControl.ItemsSource = itemCollection;
-
-            if (Window.Current.Bounds.Width < 640)
-            {
-                ScenarioControl.SelectedIndex = -1;
-            }
-            else
-            {
-                ScenarioControl.SelectedIndex = 0;
-            }
+            ScenarioFrame.Navigate(typeof(Scenario1_Discovery));
         }
 
         /// <summary>

@@ -1,0 +1,1 @@
+C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\BluetoothLE.csproj;x64

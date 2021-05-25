@@ -380,9 +380,6 @@
     <AppxPackagedFile Include="C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\bin\x86\Debug\Styles\Styles.xbf">
       <PackagePath>Styles\Styles.xbf</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\bin\x86\Debug\Scenario3_ServerForeground.xbf">
-      <PackagePath>Scenario3_ServerForeground.xbf</PackagePath>
-    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\bin\x86\Debug\Scenario2_Client.xbf">
       <PackagePath>Scenario2_Client.xbf</PackagePath>
     </AppxPackagedFile>

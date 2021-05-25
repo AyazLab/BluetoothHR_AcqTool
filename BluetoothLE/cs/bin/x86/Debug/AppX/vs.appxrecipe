@@ -30,13 +30,13 @@
     <AppXManifest Include="C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-05-19T21:41:04.333</Modified>
+      <Modified>2021-05-25T03:28:39.262</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\bin\x86\Debug\BluetoothLEUniversal.exe">
       <PackagePath>entrypoint\BluetoothLEUniversal.exe</PackagePath>
-      <Modified>2021-05-19T21:41:01.954</Modified>
+      <Modified>2021-05-25T03:28:35.450</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ndefi\.nuget\packages\microsoft.csharp\4.0.0\lib\netcore50\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>
@@ -492,31 +492,27 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\bin\x86\Debug\BluetoothLEUniversal.xr.xml">
       <PackagePath>BluetoothLEUniversal.xr.xml</PackagePath>
-      <Modified>2021-05-19T17:22:29.543</Modified>
+      <Modified>2021-05-25T03:28:35.160</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\bin\x86\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
-      <Modified>2021-05-19T21:41:01.784</Modified>
+      <Modified>2021-05-25T03:28:35.281</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\bin\x86\Debug\Scenario1_Discovery.xbf">
       <PackagePath>Scenario1_Discovery.xbf</PackagePath>
-      <Modified>2021-05-19T21:41:01.785</Modified>
+      <Modified>2021-05-25T03:28:35.282</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\bin\x86\Debug\Styles\Styles.xbf">
       <PackagePath>Styles\Styles.xbf</PackagePath>
-      <Modified>2021-05-19T21:41:01.773</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\bin\x86\Debug\Scenario3_ServerForeground.xbf">
-      <PackagePath>Scenario3_ServerForeground.xbf</PackagePath>
-      <Modified>2021-05-19T21:41:01.785</Modified>
+      <Modified>2021-05-25T03:28:35.273</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\bin\x86\Debug\Scenario2_Client.xbf">
       <PackagePath>Scenario2_Client.xbf</PackagePath>
-      <Modified>2021-05-19T21:41:01.785</Modified>
+      <Modified>2021-05-25T03:28:35.282</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\bin\x86\Debug\MainPage.xbf">
       <PackagePath>MainPage.xbf</PackagePath>
-      <Modified>2021-05-19T21:41:01.785</Modified>
+      <Modified>2021-05-25T03:28:35.282</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\10.0.18362.0\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
@@ -524,11 +520,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2021-05-19T21:41:03.751</Modified>
+      <Modified>2021-05-25T03:28:38.265</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\bin\x86\Debug\Core\BluetoothLEUniversal.exe">
       <PackagePath>BluetoothLEUniversal.exe</PackagePath>
-      <Modified>2021-05-19T21:41:04.325</Modified>
+      <Modified>2021-05-25T03:28:39.254</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

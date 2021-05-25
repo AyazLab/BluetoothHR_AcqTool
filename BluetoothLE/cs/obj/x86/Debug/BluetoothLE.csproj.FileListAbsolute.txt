@@ -216,13 +216,11 @@ C:\Users\ndefi\Downloads\win\Windows-universal-samples-master (1)\Windows-univer
 C:\Users\ndefi\Downloads\win\Windows-universal-samples-master (1)\Windows-universal-samples-master\Samples\BluetoothLE\cs\obj\x86\Debug\MultipleQualifiersPerDimensionFound.txt
 C:\Users\ndefi\Downloads\win\Windows-universal-samples-master (1)\Windows-universal-samples-master\Samples\BluetoothLE\cs\obj\x86\Debug\ProjectArchitectures.txt
 C:\Users\ndefi\Downloads\win\Windows-universal-samples-master (1)\Windows-universal-samples-master\Samples\BluetoothLE\cs\obj\x86\Debug\.winmd_cache\$Microsoft.UI.Xaml.Markup.winmd_636885022160000000.json
-C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\obj\x86\Debug\BluetoothLE.csprojAssemblyReference.cache
 C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\obj\x86\Debug\BluetoothLEUniversal.exe
 C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\obj\x86\Debug\BluetoothLEUniversal.pdb
 C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\bin\x86\Debug\App.xbf
 C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\bin\x86\Debug\Scenario1_Discovery.xbf
 C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\bin\x86\Debug\Styles\Styles.xbf
-C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\bin\x86\Debug\Scenario3_ServerForeground.xbf
 C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\bin\x86\Debug\Scenario2_Client.xbf
 C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\bin\x86\Debug\MainPage.xbf
 C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\bin\x86\Debug\BluetoothLEUniversal.xr.xml
@@ -343,8 +341,6 @@ C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\obj\x86\Debug\MainPage.g.i.c
 C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\obj\x86\Debug\MainPage.g.cs
 C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\obj\x86\Debug\Scenario1_Discovery.g.i.cs
 C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\obj\x86\Debug\Scenario1_Discovery.g.cs
-C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\obj\x86\Debug\Scenario3_ServerForeground.g.i.cs
-C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\obj\x86\Debug\Scenario3_ServerForeground.g.cs
 C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\obj\x86\Debug\Scenario2_Client.g.i.cs
 C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\obj\x86\Debug\Scenario2_Client.g.cs
 C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\obj\x86\Debug\XamlTypeInfo.g.cs
@@ -352,13 +348,11 @@ C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\obj\x86\Debug\App.xaml
 C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\obj\x86\Debug\MainPage.xaml
 C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\obj\x86\Debug\Scenario1_Discovery.xaml
 C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\obj\x86\Debug\Styles\Styles.xaml
-C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\obj\x86\Debug\Scenario3_ServerForeground.xaml
 C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\obj\x86\Debug\Scenario2_Client.xaml
 C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\obj\x86\Debug\App.xbf
 C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\obj\x86\Debug\MainPage.xbf
 C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\obj\x86\Debug\Scenario1_Discovery.xbf
 C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\obj\x86\Debug\Styles\Styles.xbf
-C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\obj\x86\Debug\Scenario3_ServerForeground.xbf
 C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\obj\x86\Debug\Scenario2_Client.xbf
 C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\obj\x86\Debug\XamlSaveStateFile.xml
 C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\obj\x86\Debug\BluetoothLE.csproj.CoreCompileInputs.cache
@@ -434,3 +428,4 @@ C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\obj\x86\Debug\qualifiers.txt
 C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\obj\x86\Debug\MultipleQualifiersPerDimensionFound.txt
 C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\obj\x86\Debug\ProjectArchitectures.txt
 C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\obj\x86\Debug\.winmd_cache\$Microsoft.UI.Xaml.Markup.winmd_636885022160000000.json
+C:\Users\ndefi\Coding\BluetoothHRacq\BluetoothLE\cs\obj\x86\Debug\BluetoothLE.csprojAssemblyReference.cache

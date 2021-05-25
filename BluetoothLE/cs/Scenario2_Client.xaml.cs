@@ -17,6 +17,7 @@ using Windows.Devices.Bluetooth;
 using Windows.Devices.Bluetooth.GenericAttributeProfile;
 using Windows.Devices.Enumeration;
 using Windows.Security.Cryptography;
+using Windows.Storage;
 using Windows.Storage.Streams;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
@@ -41,6 +42,9 @@ namespace SDKTemplate
         // Only one registered characteristic at a time.
         private GattCharacteristic registeredCharacteristic;
         private GattPresentationFormat presentationFormat;
+        private StorageFile outfile;
+        private IRandomAccessStream stream;
+        private bool streaming;
 
         #region Error Codes
         readonly int E_BLUETOOTH_ATT_WRITE_NOT_PERMITTED = unchecked((int)0x80650003);
@@ -72,6 +76,7 @@ namespace SDKTemplate
                 rootPage.NotifyUser("Error: Unable to reset app state", NotifyType.ErrorMessage);
             }
         }
+
         #endregion
 
         #region Enumerating Services
@@ -98,6 +103,10 @@ namespace SDKTemplate
 
         private async void ConnectButton_Click()
         {
+            if (streaming) {
+                ToggleStream();
+                return;
+            }
             ConnectButton.IsEnabled = false;
 
             if (!await ClearBluetoothLEDeviceAsync())
@@ -139,7 +148,6 @@ namespace SDKTemplate
                         if (DisplayHelpers.GetServiceName(service).Equals("HeartRate")) {
                             hr_service = service;
                         }
-                        ServiceList.Items.Add(new ComboBoxItem { Content = DisplayHelpers.GetServiceName(service), Tag = service });
                     }
                     if (hr_service != null)
                     {
@@ -189,23 +197,19 @@ namespace SDKTemplate
                             if (DisplayHelpers.GetCharacteristicName(c).Equals("HeartRateMeasurement")) {
                                 hr_char = c;
                             }
-                            CharacteristicList.Items.Add(new ComboBoxItem { Content = DisplayHelpers.GetCharacteristicName(c), Tag = c });
                         }
                         if (hr_char == null) {
                             rootPage.NotifyUser("Device does not have Heart Rate Measurement Characteristic", NotifyType.ErrorMessage);
                         }
                         else {
                             selectedCharacteristic = hr_char;
-                            EnableCharacteristicPanels(selectedCharacteristic.CharacteristicProperties);
+                            streaming = true;
+                            ToggleStream();
                         }
                     }
                     else {
                         rootPage.NotifyUser("Device does not have Heart Rate service", NotifyType.ErrorMessage);
                     }
-                    ConnectButton.Visibility = Visibility.Collapsed;
-                    ServiceList.Visibility = Visibility.Visible;
-
-
                 }
                 else
                 {
@@ -216,230 +220,44 @@ namespace SDKTemplate
         }
         #endregion
 
-        #region Enumerating Characteristics
-        private async void ServiceList_SelectionChanged()
-        {
-            var service = (GattDeviceService)((ComboBoxItem)ServiceList.SelectedItem)?.Tag;
-
-            CharacteristicList.Items.Clear();
-            RemoveValueChangedHandler();
-
-            IReadOnlyList<GattCharacteristic> characteristics = null;
-            try
-            {
-                // Ensure we have access to the device.
-                var accessStatus = await service.RequestAccessAsync();
-                if (accessStatus == DeviceAccessStatus.Allowed)
-                {
-                    // BT_Code: Get all the child characteristics of a service. Use the cache mode to specify uncached characterstics only 
-                    // and the new Async functions to get the characteristics of unpaired devices as well. 
-                    var result = await service.GetCharacteristicsAsync(BluetoothCacheMode.Uncached);
-                    if (result.Status == GattCommunicationStatus.Success)
-                    {
-                        characteristics = result.Characteristics;
-                    }
-                    else
-                    {
-                        rootPage.NotifyUser("Error accessing service.", NotifyType.ErrorMessage);
-
-                        // On error, act as if there are no characteristics.
-                        characteristics = new List<GattCharacteristic>();
-                    }
-                }
-                else
-                {
-                    // Not granted access
-                    rootPage.NotifyUser("Error accessing service.", NotifyType.ErrorMessage);
-
-                    // On error, act as if there are no characteristics.
-                    characteristics = new List<GattCharacteristic>();
-
-                }
-            }
-            catch (Exception ex)
-            {
-                rootPage.NotifyUser("Restricted service. Can't read characteristics: " + ex.Message,
-                    NotifyType.ErrorMessage);
-                // On error, act as if there are no characteristics.
-                characteristics = new List<GattCharacteristic>();
-            }
-
-            foreach (GattCharacteristic c in characteristics)
-            {
-                CharacteristicList.Items.Add(new ComboBoxItem { Content = DisplayHelpers.GetCharacteristicName(c), Tag = c });
-            }
-            CharacteristicList.Visibility = Visibility.Visible;
-        }
-        #endregion
-
-        private void AddValueChangedHandler()
-        {
-            ValueChangedSubscribeToggle.Content = "Unsubscribe from value changes";
-            if (!subscribedForNotifications)
-            {
-                registeredCharacteristic = selectedCharacteristic;
-                registeredCharacteristic.ValueChanged += Characteristic_ValueChanged;
-                subscribedForNotifications = true;
-            }
-        }
-
-        private void RemoveValueChangedHandler()
-        {
-            ValueChangedSubscribeToggle.Content = "Subscribe to value changes";
-            if (subscribedForNotifications)
-            {
-                registeredCharacteristic.ValueChanged -= Characteristic_ValueChanged;
-                registeredCharacteristic = null;
-                subscribedForNotifications = false;
-            }
-        }
-
-        private async void CharacteristicList_SelectionChanged()
-        {
-            selectedCharacteristic = (GattCharacteristic)((ComboBoxItem)CharacteristicList.SelectedItem)?.Tag;
-            if (selectedCharacteristic == null)
-            {
-                EnableCharacteristicPanels(GattCharacteristicProperties.None);
-                rootPage.NotifyUser("No characteristic selected", NotifyType.ErrorMessage);
-                return;
-            }
-
-            // Get all the child descriptors of a characteristics. Use the cache mode to specify uncached descriptors only 
-            // and the new Async functions to get the descriptors of unpaired devices as well. 
-            var result = await selectedCharacteristic.GetDescriptorsAsync(BluetoothCacheMode.Uncached);
-            if (result.Status != GattCommunicationStatus.Success)
-            {
-                rootPage.NotifyUser("Descriptor read failure: " + result.Status.ToString(), NotifyType.ErrorMessage);
-            }
-
-            // BT_Code: There's no need to access presentation format unless there's at least one. 
-            presentationFormat = null;
-            if (selectedCharacteristic.PresentationFormats.Count > 0)
-            {
-
-                if (selectedCharacteristic.PresentationFormats.Count.Equals(1))
-                {
-                    // Get the presentation format since there's only one way of presenting it
-                    presentationFormat = selectedCharacteristic.PresentationFormats[0];
-                }
-                else
-                {
-                    // It's difficult to figure out how to split up a characteristic and encode its different parts properly.
-                    // In this case, we'll just encode the whole thing to a string to make it easy to print out.
-                }
-            }
-
-            // Enable/disable operations based on the GattCharacteristicProperties.
-            EnableCharacteristicPanels(selectedCharacteristic.CharacteristicProperties);
-        }
-
         private void SetVisibility(UIElement element, bool visible)
         {
             element.Visibility = visible ? Visibility.Visible : Visibility.Collapsed;
-        }
+        }    
 
-        private void EnableCharacteristicPanels(GattCharacteristicProperties properties)
-        {
-            // BT_Code: Hide the controls which do not apply to this characteristic.
-            SetVisibility(CharacteristicReadButton, properties.HasFlag(GattCharacteristicProperties.Read));
-
-            SetVisibility(CharacteristicWritePanel,
-                properties.HasFlag(GattCharacteristicProperties.Write) ||
-                properties.HasFlag(GattCharacteristicProperties.WriteWithoutResponse));
-            CharacteristicWriteValue.Text = "";
-
-            SetVisibility(ValueChangedSubscribeToggle, properties.HasFlag(GattCharacteristicProperties.Indicate) ||
-                                                       properties.HasFlag(GattCharacteristicProperties.Notify));
-
-        }
-
-        private async void CharacteristicReadButton_Click()
-        {
-            // BT_Code: Read the actual value from the device by using Uncached.
-            GattReadResult result = await selectedCharacteristic.ReadValueAsync(BluetoothCacheMode.Uncached);
-            if (result.Status == GattCommunicationStatus.Success)
-            {
-                string formattedResult = FormatValueByPresentation(result.Value, presentationFormat);
-                rootPage.NotifyUser($"Read result: {formattedResult}", NotifyType.StatusMessage);
-            }
-            else
-            {
-                rootPage.NotifyUser($"Read failed: {result.Status}", NotifyType.ErrorMessage);
-            }
-        }
-
-        private async void CharacteristicWriteButton_Click()
-        {
-            if (!String.IsNullOrEmpty(CharacteristicWriteValue.Text))
-            {
-                var writeBuffer = CryptographicBuffer.ConvertStringToBinary(CharacteristicWriteValue.Text,
-                    BinaryStringEncoding.Utf8);
-
-                var writeSuccessful = await WriteBufferToSelectedCharacteristicAsync(writeBuffer);
-            }
-            else
-            {
-                rootPage.NotifyUser("No data to write to device", NotifyType.ErrorMessage);
-            }
-        }
-
-        private async void CharacteristicWriteButtonInt_Click()
-        {
-            if (!String.IsNullOrEmpty(CharacteristicWriteValue.Text))
-            {
-                var isValidValue = Int32.TryParse(CharacteristicWriteValue.Text, out int readValue);
-                if (isValidValue)
-                {
-                    var writer = new DataWriter();
-                    writer.ByteOrder = ByteOrder.LittleEndian;
-                    writer.WriteInt32(readValue);
-
-                    var writeSuccessful = await WriteBufferToSelectedCharacteristicAsync(writer.DetachBuffer());
-                }
-                else
-                {
-                    rootPage.NotifyUser("Data to write has to be an int32", NotifyType.ErrorMessage);
-                }
-            }
-            else
-            {
-                rootPage.NotifyUser("No data to write to device", NotifyType.ErrorMessage);
-            }
-        }
-
-        private async Task<bool> WriteBufferToSelectedCharacteristicAsync(IBuffer buffer)
-        {
-            try
-            {
-                // BT_Code: Writes the value from the buffer to the characteristic.
-                var result = await selectedCharacteristic.WriteValueWithResultAsync(buffer);
-
-                if (result.Status == GattCommunicationStatus.Success)
-                {
-                    rootPage.NotifyUser("Successfully wrote value to device", NotifyType.StatusMessage);
-                    return true;
-                }
-                else
-                {
-                    rootPage.NotifyUser($"Write failed: {result.Status}", NotifyType.ErrorMessage);
-                    return false;
-                }
-            }
-            catch (Exception ex) when (ex.HResult == E_BLUETOOTH_ATT_INVALID_PDU)
-            {
-                rootPage.NotifyUser(ex.Message, NotifyType.ErrorMessage);
-                return false;
-            }
-            catch (Exception ex) when (ex.HResult == E_BLUETOOTH_ATT_WRITE_NOT_PERMITTED || ex.HResult == E_ACCESSDENIED)
-            {
-                // This usually happens when a device reports that it support writing, but it actually doesn't.
-                rootPage.NotifyUser(ex.Message, NotifyType.ErrorMessage);
-                return false;
-            }
-        }
 
         private bool subscribedForNotifications = false;
-        private async void ValueChangedSubscribeToggle_Click()
+
+        private void BackButton_Click() {
+            Frame.Navigate(typeof(Scenario1_Discovery));
+        }
+
+        private async void ChooseButton_Click() {
+            var savePicker = new Windows.Storage.Pickers.FileSavePicker();
+            savePicker.SuggestedStartLocation =
+                Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
+            // Dropdown of file types the user can save the file as
+            savePicker.FileTypeChoices.Add("Plain Text", new List<string>() { ".csv" });
+            // Default file name if the user does not type one in or select a file to replace
+            savePicker.SuggestedFileName = "hrStream";
+            outfile = await savePicker.PickSaveFileAsync();
+            if (outfile != null)
+            {
+                FilePath.Text = outfile.Path;
+                stream = await outfile.OpenAsync(FileAccessMode.ReadWrite);
+                using (var outputStream = stream.GetOutputStreamAt(0))
+                {
+                    using (var dataWriter = new DataWriter(outputStream))
+                    {
+                        dataWriter.WriteString("Time, DataType, Value\n");
+                        await dataWriter.StoreAsync();
+                        await outputStream.FlushAsync();
+                    }
+                }
+            }
+        }
+
+        private async void ToggleStream()
         {
             if (!subscribedForNotifications)
             {
@@ -464,7 +282,13 @@ namespace SDKTemplate
 
                     if (status == GattCommunicationStatus.Success)
                     {
-                        AddValueChangedHandler();
+                        ConnectButton.Content = "Stop stream";
+                        if (!subscribedForNotifications)
+                        {
+                            registeredCharacteristic = selectedCharacteristic;
+                            registeredCharacteristic.ValueChanged += Characteristic_ValueChanged;
+                            subscribedForNotifications = true;
+                        }
                         rootPage.NotifyUser("Successfully subscribed for value changes", NotifyType.StatusMessage);
                     }
                     else
@@ -491,7 +315,15 @@ namespace SDKTemplate
                     if (result == GattCommunicationStatus.Success)
                     {
                         subscribedForNotifications = false;
-                        RemoveValueChangedHandler();
+                        ConnectButton.Content = "Start stream";
+                        if (subscribedForNotifications)
+                        {
+                            registeredCharacteristic.ValueChanged -= Characteristic_ValueChanged;
+                            registeredCharacteristic = null;
+                            subscribedForNotifications = false;
+                            stream.Dispose();
+                            stream = null;
+                        }
                         rootPage.NotifyUser("Successfully un-registered for notifications", NotifyType.StatusMessage);
                     }
                     else
@@ -507,12 +339,26 @@ namespace SDKTemplate
             }
         }
 
+
         private async void Characteristic_ValueChanged(GattCharacteristic sender, GattValueChangedEventArgs args)
         {
             // BT_Code: An Indicate or Notify reported that the value has changed.
             // Display the new value with a timestamp.
             var newValue = FormatValueByPresentation(args.CharacteristicValue, presentationFormat);
             var message = $"\nValue at {DateTime.Now:hh:mm:ss.FFF}: {newValue}";
+
+            if (outfile != null) {
+                using (var outputStream = stream.GetOutputStreamAt(stream.Size))
+                {
+                    using (var dataWriter = new DataWriter(outputStream))
+                    {
+                        dataWriter.WriteString($"{DateTime.Now:hh:mm:ss.FFF}, {newValue}\n");
+                        await dataWriter.StoreAsync();
+                        await outputStream.FlushAsync();
+                    }
+                }
+            }
+
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
                 () => CharacteristicLatestValue.Text += message);
         }
@@ -643,7 +489,7 @@ namespace SDKTemplate
         }
 
         private static string toInterval(byte[] data) {
-            var L = new double[data.Length - 2];
+            var L = new double[(data.Length-2)/2];
             for (int i = 2; i < data.Length; i+=2) {
                 L[(i - 2) / 2] = (data[i + 1] * 256 + data[i]) / 1024.0;
             }
