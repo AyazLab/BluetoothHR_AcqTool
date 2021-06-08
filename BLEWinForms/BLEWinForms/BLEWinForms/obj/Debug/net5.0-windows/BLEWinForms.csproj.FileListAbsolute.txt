@@ -1,0 +1,7 @@
+C:\Users\ndefi\Coding\BluetoothHRacq\BLEWinForms\BLEWinForms\BLEWinForms\obj\Debug\net5.0-windows\BLEWinForms.csprojAssemblyReference.cache
+C:\Users\ndefi\Coding\BluetoothHRacq\BLEWinForms\BLEWinForms\BLEWinForms\obj\Debug\net5.0-windows\BLEWinForms.Form1.resources
+C:\Users\ndefi\Coding\BluetoothHRacq\BLEWinForms\BLEWinForms\BLEWinForms\obj\Debug\net5.0-windows\BLEWinForms.csproj.GenerateResource.cache
+C:\Users\ndefi\Coding\BluetoothHRacq\BLEWinForms\BLEWinForms\BLEWinForms\obj\Debug\net5.0-windows\BLEWinForms.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ndefi\Coding\BluetoothHRacq\BLEWinForms\BLEWinForms\BLEWinForms\obj\Debug\net5.0-windows\BLEWinForms.AssemblyInfoInputs.cache
+C:\Users\ndefi\Coding\BluetoothHRacq\BLEWinForms\BLEWinForms\BLEWinForms\obj\Debug\net5.0-windows\BLEWinForms.AssemblyInfo.cs
+C:\Users\ndefi\Coding\BluetoothHRacq\BLEWinForms\BLEWinForms\BLEWinForms\obj\Debug\net5.0-windows\BLEWinForms.csproj.CoreCompileInputs.cache
