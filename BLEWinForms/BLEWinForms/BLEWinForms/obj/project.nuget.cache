@@ -1,13 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "GvAFTYJCjVcd5ly2NVKhdtrZA1Zyix/pFQEd/Fi6qo9xLml76TYHntZ8gg9pCIdNjl45jRzhpfBqTmoOjB7Vzw==",
+  "dgSpecHash": "HsIF7VxuAA4qJzuuN5PmHDUuZVA5BipLIeQnkCXOO6DFzFoWnH3zVgOT+467IzaxQ+ELa+zQycXYjatw/ZxX5g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ndefi\\Coding\\BluetoothHRacq\\BLEWinForms\\BLEWinForms\\BLEWinForms\\BLEWinForms.csproj",
+  "projectFilePath": "D:\\Github\\BluetoothHRacq\\BLEWinForms\\BLEWinForms\\BLEWinForms\\BLEWinForms.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\ndefi\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.0.3\\microsoft.netcore.app.host.win-x64.3.0.3.nupkg.sha512",
-    "C:\\Users\\ndefi\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.0.1\\microsoft.aspnetcore.app.ref.3.0.1.nupkg.sha512",
-    "C:\\Users\\ndefi\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.0.0\\microsoft.windowsdesktop.app.ref.3.0.0.nupkg.sha512",
-    "C:\\Users\\ndefi\\.nuget\\packages\\microsoft.netcore.app.ref\\3.0.0\\microsoft.netcore.app.ref.3.0.0.nupkg.sha512"
+    "C:\\Users\\adria\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.0.3\\microsoft.netcore.app.host.win-x64.3.0.3.nupkg.sha512",
+    "C:\\Users\\adria\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.0.1\\microsoft.aspnetcore.app.ref.3.0.1.nupkg.sha512",
+    "C:\\Users\\adria\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.0.0\\microsoft.windowsdesktop.app.ref.3.0.0.nupkg.sha512",
+    "C:\\Users\\adria\\.nuget\\packages\\microsoft.netcore.app.ref\\3.0.0\\microsoft.netcore.app.ref.3.0.0.nupkg.sha512"
   ],
   "logs": []
 }
