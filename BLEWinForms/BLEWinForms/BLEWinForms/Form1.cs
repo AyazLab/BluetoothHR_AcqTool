@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Navigation;
 using System.Windows.Forms;
 using SDKTemplate;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace BLEWinForms
 {
@@ -42,8 +43,7 @@ namespace BLEWinForms
         // Only one registered characteristic at a time.
         private GattCharacteristic registeredCharacteristic;
         private GattPresentationFormat presentationFormat;
-        private StorageFile outfile;
-        private IRandomAccessStream stream;
+        private FileStream outfile;
         private bool streaming;
 
         #region Error Codes
@@ -331,7 +331,7 @@ namespace BLEWinForms
             }
         }
 
-        private async void selectFileButton_Click(object sender, EventArgs e)
+        /*private async void selectFileButton_Click(object sender, EventArgs e)
         {
             var savePicker = new Windows.Storage.Pickers.FileSavePicker();
             savePicker.SuggestedStartLocation =
@@ -343,7 +343,7 @@ namespace BLEWinForms
             outfile = await savePicker.PickSaveFileAsync();
             if (outfile != null)
             {
-                selectedFileBox.Text = outfile.Path;
+                subjectNumberBox.Text = outfile.Path;
                 stream = await outfile.OpenAsync(FileAccessMode.ReadWrite);
                 using (var outputStream = stream.GetOutputStreamAt(0))
                 {
@@ -355,7 +355,7 @@ namespace BLEWinForms
                     }
                 }
             }
-        }
+        }*/
 
         private async Task<bool> ClearBluetoothLEDeviceAsync()
         {
@@ -382,7 +382,6 @@ namespace BLEWinForms
         {
             if (streaming)
             {
-                ToggleStream();
                 return;
             }
             connectButton.Enabled = false;
@@ -482,9 +481,10 @@ namespace BLEWinForms
                         }
                         else
                         {
+                            connectionLabel.Text = "Connected";
+                            connectionLabel.ForeColor = Color.Green;
+                            streamButton.Enabled = true;
                             selectedCharacteristic = hr_char;
-                            streaming = true;
-                            ToggleStream();
                         }
                     }
                     else
@@ -495,11 +495,19 @@ namespace BLEWinForms
                 else
                 {
                     statusStrip.Text = "Device unreachable";
+                    connectionLabel.Text = "Disconnected";
+                    connectionLabel.ForeColor = Color.Red;
+                    streamButton.Enabled = false;
                 }
             }
             connectButton.Enabled = true;
         }
-
+        private static void AddText(FileStream fs, string value)
+        {
+            byte[] info = new UTF8Encoding(true).GetBytes(value);
+            fs.Write(info);
+            fs.Flush();
+        }
         private async void ToggleStream()
         {
             if (!subscribedForNotifications)
@@ -528,6 +536,9 @@ namespace BLEWinForms
                         streamButton.Text = "Stop stream";
                         if (!subscribedForNotifications)
                         {
+                            string filename = "C:/tmp/records/" + subjectNumberBox.Text + "_" + DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString("00") + DateTime.Now.Day.ToString("00") + "_" + DateTime.Now.Hour.ToString("00") + DateTime.Now.Minute.ToString("00") + DateTime.Now.Second.ToString("00") + ".csv";
+                            outfile = File.Open(filename, FileMode.Create);
+                            AddText(outfile, "Time, DataType, Value\n");
                             registeredCharacteristic = selectedCharacteristic;
                             registeredCharacteristic.ValueChanged += Characteristic_ValueChanged;
                             subscribedForNotifications = true;
@@ -564,8 +575,7 @@ namespace BLEWinForms
                             registeredCharacteristic.ValueChanged -= Characteristic_ValueChanged;
                             registeredCharacteristic = null;
                             subscribedForNotifications = false;
-                            stream.Dispose();
-                            stream = null;
+                            outfile.Close();
                         }
                         statusStrip.Text = "Successfully un-registered for notifications";
                     }
@@ -582,7 +592,7 @@ namespace BLEWinForms
             }
         }
 
-        private async void Characteristic_ValueChanged(GattCharacteristic sender, GattValueChangedEventArgs args)
+        private void Characteristic_ValueChanged(GattCharacteristic sender, GattValueChangedEventArgs args)
         {
             // BT_Code: An Indicate or Notify reported that the value has changed.
             // Display the new value with a timestamp.
@@ -591,15 +601,7 @@ namespace BLEWinForms
 
             if (outfile != null)
             {
-                using (var outputStream = stream.GetOutputStreamAt(stream.Size))
-                {
-                    using (var dataWriter = new DataWriter(outputStream))
-                    {
-                        dataWriter.WriteString($"{DateTime.Now:hh:mm:ss.FFF}, {newValue}\n");
-                        await dataWriter.StoreAsync();
-                        await outputStream.FlushAsync();
-                    }
-                }
+                AddText(outfile, $"{DateTime.Now:hh:mm:ss.FFF}, {newValue}\n");
             }
 
             //await Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
@@ -741,6 +743,21 @@ namespace BLEWinForms
                 L[(i - 2) / 2] = (data[i + 1] * 256 + data[i]) / 1024.0;
             }
             return "[" + string.Join(", ", L) + "]";
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void streamButton_Click(object sender, EventArgs e)
+        {
+            ToggleStream();
         }
     }
 }

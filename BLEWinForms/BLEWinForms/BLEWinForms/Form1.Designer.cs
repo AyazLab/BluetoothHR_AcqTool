@@ -30,15 +30,16 @@ namespace BLEWinForms
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.connectionLabel = new System.Windows.Forms.Label();
             this.deviceListView = new System.Windows.Forms.ComboBox();
             this.connectButton = new System.Windows.Forms.Button();
             this.scanButton = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.streamButton = new System.Windows.Forms.Button();
-            this.selectFileButton = new System.Windows.Forms.Button();
-            this.selectedFileBox = new System.Windows.Forms.TextBox();
+            this.subjectNumberBox = new System.Windows.Forms.TextBox();
+            this.statusStrip = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -50,39 +51,43 @@ namespace BLEWinForms
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.61702F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 76.38298F));
-            this.tableLayoutPanel1.Controls.Add(this.statusStrip, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.groupBox1, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.scanButton, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.groupBox2, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.statusStrip, 0, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 652F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 563F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1423, 827);
             this.tableLayoutPanel1.TabIndex = 0;
             this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint_1);
             // 
-            // statusStrip
-            // 
-            this.statusStrip.ImageScalingSize = new System.Drawing.Size(40, 40);
-            this.statusStrip.Location = new System.Drawing.Point(0, 807);
-            this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(336, 20);
-            this.statusStrip.TabIndex = 3;
-            this.statusStrip.Text = "statusStrip1";
-            // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.connectionLabel);
             this.groupBox1.Controls.Add(this.deviceListView);
             this.groupBox1.Controls.Add(this.connectButton);
             this.groupBox1.Location = new System.Drawing.Point(339, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1081, 124);
+            this.groupBox1.Size = new System.Drawing.Size(1081, 210);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
+            // 
+            // connectionLabel
+            // 
+            this.connectionLabel.AutoSize = true;
+            this.connectionLabel.ForeColor = System.Drawing.Color.Red;
+            this.connectionLabel.Location = new System.Drawing.Point(873, 136);
+            this.connectionLabel.Name = "connectionLabel";
+            this.connectionLabel.Size = new System.Drawing.Size(199, 41);
+            this.connectionLabel.TabIndex = 2;
+            this.connectionLabel.Text = "Disconnected";
+            this.connectionLabel.Click += new System.EventHandler(this.label2_Click);
             // 
             // deviceListView
             // 
@@ -117,14 +122,24 @@ namespace BLEWinForms
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.streamButton);
-            this.groupBox2.Controls.Add(this.selectFileButton);
-            this.groupBox2.Controls.Add(this.selectedFileBox);
-            this.groupBox2.Location = new System.Drawing.Point(339, 158);
+            this.groupBox2.Controls.Add(this.subjectNumberBox);
+            this.groupBox2.Location = new System.Drawing.Point(339, 219);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1081, 646);
+            this.groupBox2.Size = new System.Drawing.Size(1081, 557);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(32, 56);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(308, 41);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Enter subject number:";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // streamButton
             // 
@@ -135,23 +150,23 @@ namespace BLEWinForms
             this.streamButton.TabIndex = 2;
             this.streamButton.Text = "Begin Streaming";
             this.streamButton.UseVisualStyleBackColor = true;
+            this.streamButton.Click += new System.EventHandler(this.streamButton_Click);
             // 
-            // selectFileButton
+            // subjectNumberBox
             // 
-            this.selectFileButton.Location = new System.Drawing.Point(703, 46);
-            this.selectFileButton.Name = "selectFileButton";
-            this.selectFileButton.Size = new System.Drawing.Size(188, 58);
-            this.selectFileButton.TabIndex = 1;
-            this.selectFileButton.Text = "Select File";
-            this.selectFileButton.UseVisualStyleBackColor = true;
-            this.selectFileButton.Click += new System.EventHandler(this.selectFileButton_Click);
+            this.subjectNumberBox.Location = new System.Drawing.Point(346, 56);
+            this.subjectNumberBox.Name = "subjectNumberBox";
+            this.subjectNumberBox.Size = new System.Drawing.Size(155, 47);
+            this.subjectNumberBox.TabIndex = 0;
             // 
-            // selectedFileBox
+            // statusStrip
             // 
-            this.selectedFileBox.Location = new System.Drawing.Point(32, 46);
-            this.selectedFileBox.Name = "selectedFileBox";
-            this.selectedFileBox.Size = new System.Drawing.Size(642, 47);
-            this.selectedFileBox.TabIndex = 0;
+            this.statusStrip.AutoSize = true;
+            this.tableLayoutPanel1.SetColumnSpan(this.statusStrip, 2);
+            this.statusStrip.Location = new System.Drawing.Point(3, 779);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(0, 41);
+            this.statusStrip.TabIndex = 5;
             // 
             // openFileDialog1
             // 
@@ -168,6 +183,7 @@ namespace BLEWinForms
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
@@ -179,13 +195,14 @@ namespace BLEWinForms
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Button connectButton;
         private System.Windows.Forms.Button scanButton;
-        private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ComboBox deviceListView;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button streamButton;
-        private System.Windows.Forms.Button selectFileButton;
-        private System.Windows.Forms.TextBox selectedFileBox;
+        private System.Windows.Forms.TextBox subjectNumberBox;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Label statusStrip;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label connectionLabel;
     }
 }
