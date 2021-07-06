@@ -43,8 +43,12 @@ namespace BLEWinForms
         // Only one registered characteristic at a time.
         private GattCharacteristic registeredCharacteristic;
         private GattPresentationFormat presentationFormat;
-        private FileStream outfile;
+        private Logging outfile;
         private bool streaming;
+
+        private UDPListener udpListener;
+        private int udpPortNo = 5501;
+        private int udpMsgLen = 1;
 
         #region Error Codes
         readonly int E_BLUETOOTH_ATT_WRITE_NOT_PERMITTED = unchecked((int)0x80650003);
@@ -502,11 +506,10 @@ namespace BLEWinForms
             }
             connectButton.Enabled = true;
         }
-        private static void AddText(FileStream fs, string value)
+        private void AddText(Logging logging, string value)
         {
-            byte[] info = new UTF8Encoding(true).GetBytes(value);
-            fs.Write(info);
-            fs.Flush();
+            outputHistoryBox.Text += value + "\n";
+            logging.WriteData(value);
         }
         private async void ToggleStream()
         {
@@ -536,9 +539,25 @@ namespace BLEWinForms
                         streamButton.Text = "Stop stream";
                         if (!subscribedForNotifications)
                         {
-                            string filename = "C:/tmp/records/" + subjectNumberBox.Text + "_" + DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString("00") + DateTime.Now.Day.ToString("00") + "_" + DateTime.Now.Hour.ToString("00") + DateTime.Now.Minute.ToString("00") + DateTime.Now.Second.ToString("00") + ".csv";
-                            outfile = File.Open(filename, FileMode.Create);
+                            var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                            var subFolderPath = Path.Combine(path, "Hrv_Data");
+                            if (!Directory.Exists(subFolderPath)) {
+                                Directory.CreateDirectory(subFolderPath);
+                            }
+                            string filename = "hrvData_" + subjectNumberBox.Text + "_" + DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString("00") + DateTime.Now.Day.ToString("00") + "_" + DateTime.Now.Hour.ToString("00") + DateTime.Now.Minute.ToString("00") + DateTime.Now.Second.ToString("00") + ".csv";
+                            outfile = new Logging(Path.Combine(subFolderPath, filename), ",");
                             AddText(outfile, "Time, DataType, Value\n");
+                            int.TryParse(udpPortBox.Text, out udpPortNo);
+                            udpListener = new UDPListener(udpPortNo);
+                            udpListener.NewMessageReceived += delegate (object o, MyMessageArgs msgData)
+                            {
+                                string timestamp = DateTime.Now.Hour.ToString("00") + DateTime.Now.Minute.ToString("00") + DateTime.Now.Second.ToString("00") + ".csv";
+
+                                string s = o.ToString() + " " + msgData.data.ToString();
+                                outfile.WriteMarker(msgData.data[0]);
+                                statusStrip.Text = ("Marker received: " + timestamp + " : " + s);
+                            };
+                            udpListener.StartListener(udpMsgLen);
                             registeredCharacteristic = selectedCharacteristic;
                             registeredCharacteristic.ValueChanged += Characteristic_ValueChanged;
                             subscribedForNotifications = true;
@@ -575,7 +594,8 @@ namespace BLEWinForms
                             registeredCharacteristic.ValueChanged -= Characteristic_ValueChanged;
                             registeredCharacteristic = null;
                             subscribedForNotifications = false;
-                            outfile.Close();
+                            udpListener.StopListener();
+                            outfile.CloseFile();
                         }
                         statusStrip.Text = "Successfully un-registered for notifications";
                     }
@@ -758,6 +778,23 @@ namespace BLEWinForms
         private void streamButton_Click(object sender, EventArgs e)
         {
             ToggleStream();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            udpPortBox.Text = "5501";
+            int.TryParse(udpPortBox.Text, out udpPortNo);
+            udpListener = new UDPListener(udpPortNo);
+        }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
