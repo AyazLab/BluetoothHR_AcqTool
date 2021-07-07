@@ -60,7 +60,7 @@ namespace BLEWinForms
                 PCsvFile.Write(Delimeter);
             }
 
-            PCsvFile.WriteLine();
+            PCsvFile.WriteLine(str);
 
 
             bRowInProgress = false;
