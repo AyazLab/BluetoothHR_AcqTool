@@ -43,7 +43,9 @@ namespace BLEWinForms
         {
             bRowInProgress = true;
 
-            PCsvFile.Write(System.DateTime.Now.Hour + ":" + System.DateTime.Now.Minute + "." + System.DateTime.Now.Second + "." + System.DateTime.Now.Millisecond + Delimeter);
+            string outStr = System.DateTime.Now.Hour + ":" + System.DateTime.Now.Minute + "." + System.DateTime.Now.Second + "." + System.DateTime.Now.Millisecond + Delimeter;
+
+            
 
             //for (int i = 0; i < data.Length; i++)
             //{
@@ -52,15 +54,15 @@ namespace BLEWinForms
 
             if (bWriteMarkerNext > 0)
             {
-                PCsvFile.Write("MRK" + bWriteMarkerNext + Delimeter+str);
+                outStr=outStr+"MRK" + bWriteMarkerNext + Delimeter+str;
                 bWriteMarkerNext = 0;
             }
             else
             {
-                PCsvFile.Write(Delimeter+str);
+                outStr = outStr + Delimeter+str;
             }
 
-            PCsvFile.WriteLine();
+            PCsvFile.WriteLine(outStr);
 
 
             bRowInProgress = false;
