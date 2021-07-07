@@ -39,7 +39,7 @@ namespace BLEWinForms
 
 
 
-        public void WriteData(String str)
+        public void WriteData(string str)
         {
             bRowInProgress = true;
 
@@ -52,15 +52,15 @@ namespace BLEWinForms
 
             if (bWriteMarkerNext > 0)
             {
-                PCsvFile.Write("MRK" + bWriteMarkerNext + Delimeter);
+                PCsvFile.Write("MRK" + bWriteMarkerNext + Delimeter+str);
                 bWriteMarkerNext = 0;
             }
             else
             {
-                PCsvFile.Write(Delimeter);
+                PCsvFile.Write(Delimeter+str);
             }
 
-            PCsvFile.WriteLine(str);
+            PCsvFile.WriteLine();
 
 
             bRowInProgress = false;

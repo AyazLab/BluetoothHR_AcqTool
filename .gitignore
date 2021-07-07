@@ -3,8 +3,6 @@
 **/obj
 /.vs/**
 **/.vs
-**/obj/**
-*/bin/**
 /bin/
 *.pdb
 BLEStable/netcoreapp3.0/BLEWinForms.deps.json
