@@ -526,9 +526,9 @@ namespace BLEWinForms
 
         private void LogAndAdd(Logging logging, string value)
         {
-
-            AddText(value);
             logging.WriteData(value);
+            AddText(value);
+            
         }
         private async void ToggleStream()
         {
