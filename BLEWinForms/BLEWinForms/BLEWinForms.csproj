@@ -4,10 +4,15 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
+    <Configurations>Debug;Release;Stable</Configurations>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <WarningLevel>5</WarningLevel>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Stable|AnyCPU'">
+    <OutputPath>../../BLEStable\</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>

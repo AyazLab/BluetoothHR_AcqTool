@@ -63,7 +63,7 @@ namespace BLEWinForms
             this.tableLayoutPanel1.Controls.Add(this.groupBox2, 1, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -81,9 +81,9 @@ namespace BLEWinForms
             this.groupBox1.Controls.Add(this.deviceListView);
             this.groupBox1.Controls.Add(this.connectButton);
             this.groupBox1.Location = new System.Drawing.Point(239, 2);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(763, 154);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
@@ -104,7 +104,7 @@ namespace BLEWinForms
             // 
             this.deviceListView.FormattingEnabled = true;
             this.deviceListView.Location = new System.Drawing.Point(23, 34);
-            this.deviceListView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.deviceListView.Margin = new System.Windows.Forms.Padding(2);
             this.deviceListView.Name = "deviceListView";
             this.deviceListView.Size = new System.Drawing.Size(582, 38);
             this.deviceListView.TabIndex = 1;
@@ -114,7 +114,7 @@ namespace BLEWinForms
             // 
             this.connectButton.Enabled = false;
             this.connectButton.Location = new System.Drawing.Point(624, 34);
-            this.connectButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.connectButton.Margin = new System.Windows.Forms.Padding(2);
             this.connectButton.Name = "connectButton";
             this.connectButton.Size = new System.Drawing.Size(133, 42);
             this.connectButton.TabIndex = 0;
@@ -148,9 +148,9 @@ namespace BLEWinForms
             this.groupBox3.Controls.Add(this.udpPortBox);
             this.groupBox3.Controls.Add(this.label2);
             this.groupBox3.Location = new System.Drawing.Point(2, 160);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox3.Size = new System.Drawing.Size(233, 315);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
@@ -158,7 +158,7 @@ namespace BLEWinForms
             // udpPortBox
             // 
             this.udpPortBox.Location = new System.Drawing.Point(6, 64);
-            this.udpPortBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.udpPortBox.Margin = new System.Windows.Forms.Padding(2);
             this.udpPortBox.Name = "udpPortBox";
             this.udpPortBox.Size = new System.Drawing.Size(178, 35);
             this.udpPortBox.TabIndex = 1;
@@ -180,9 +180,9 @@ namespace BLEWinForms
             this.groupBox2.Controls.Add(this.streamButton);
             this.groupBox2.Controls.Add(this.subjectNumberBox);
             this.groupBox2.Location = new System.Drawing.Point(239, 160);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox2.Size = new System.Drawing.Size(763, 408);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
@@ -192,9 +192,10 @@ namespace BLEWinForms
             // 
             this.outputHistoryBox.Enabled = false;
             this.outputHistoryBox.Location = new System.Drawing.Point(23, 159);
-            this.outputHistoryBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.outputHistoryBox.Margin = new System.Windows.Forms.Padding(2);
             this.outputHistoryBox.Multiline = true;
             this.outputHistoryBox.Name = "outputHistoryBox";
+            this.outputHistoryBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.outputHistoryBox.Size = new System.Drawing.Size(707, 224);
             this.outputHistoryBox.TabIndex = 4;
             this.outputHistoryBox.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
@@ -205,16 +206,16 @@ namespace BLEWinForms
             this.label1.Location = new System.Drawing.Point(23, 41);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(216, 30);
+            this.label1.Size = new System.Drawing.Size(165, 30);
             this.label1.TabIndex = 3;
-            this.label1.Text = "Enter subject number:";
+            this.label1.Text = "Enter subject ID:";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // streamButton
             // 
             this.streamButton.Enabled = false;
             this.streamButton.Location = new System.Drawing.Point(23, 101);
-            this.streamButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.streamButton.Margin = new System.Windows.Forms.Padding(2);
             this.streamButton.Name = "streamButton";
             this.streamButton.Size = new System.Drawing.Size(186, 42);
             this.streamButton.TabIndex = 2;
@@ -225,10 +226,11 @@ namespace BLEWinForms
             // subjectNumberBox
             // 
             this.subjectNumberBox.Location = new System.Drawing.Point(244, 41);
-            this.subjectNumberBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.subjectNumberBox.Margin = new System.Windows.Forms.Padding(2);
             this.subjectNumberBox.Name = "subjectNumberBox";
-            this.subjectNumberBox.Size = new System.Drawing.Size(111, 35);
+            this.subjectNumberBox.Size = new System.Drawing.Size(160, 35);
             this.subjectNumberBox.TabIndex = 0;
+            this.subjectNumberBox.Text = "TestSubject";
             // 
             // openFileDialog1
             // 
@@ -240,7 +242,7 @@ namespace BLEWinForms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1004, 605);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);

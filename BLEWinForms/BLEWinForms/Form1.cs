@@ -506,9 +506,28 @@ namespace BLEWinForms
             }
             connectButton.Enabled = true;
         }
-        private void AddText(Logging logging, string value)
+
+        private delegate void SafeCallDelegate(string value);
+        private void AddText(string value)
         {
-            outputHistoryBox.Text += value + "\n";
+            
+            if (outputHistoryBox.InvokeRequired)
+            {
+                var d = new SafeCallDelegate(AddText);
+                outputHistoryBox.Invoke(d, new object[] { value });
+            }
+            else
+            {
+                string str = value + "\r\n";
+                outputHistoryBox.AppendText(str);
+               
+            }
+        }
+
+        private void LogAndAdd(Logging logging, string value)
+        {
+
+            AddText(value);
             logging.WriteData(value);
         }
         private async void ToggleStream()
@@ -546,7 +565,7 @@ namespace BLEWinForms
                             }
                             string filename = "hrvData_" + subjectNumberBox.Text + "_" + DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString("00") + DateTime.Now.Day.ToString("00") + "_" + DateTime.Now.Hour.ToString("00") + DateTime.Now.Minute.ToString("00") + DateTime.Now.Second.ToString("00") + ".csv";
                             outfile = new Logging(Path.Combine(subFolderPath, filename), ",");
-                            AddText(outfile, "Time, DataType, Value\n");
+                            LogAndAdd(outfile, "Time, DataType, Value\n");
                             int.TryParse(udpPortBox.Text, out udpPortNo);
                             udpListener = new UDPListener(udpPortNo);
                             udpListener.NewMessageReceived += delegate (object o, MyMessageArgs msgData)
@@ -555,7 +574,10 @@ namespace BLEWinForms
 
                                 string s = o.ToString() + " " + msgData.data.ToString();
                                 outfile.WriteMarker(msgData.data[0]);
-                                statusStrip.Text = ("Marker received: " + timestamp + " : " + s);
+                                string mrkMessage = "Marker received: " + timestamp + " : " + s;
+                                statusStrip.Text = (mrkMessage);
+                                AddText(mrkMessage);
+
                             };
                             udpListener.StartListener(udpMsgLen);
                             registeredCharacteristic = selectedCharacteristic;
@@ -621,7 +643,7 @@ namespace BLEWinForms
 
             if (outfile != null)
             {
-                AddText(outfile, $"{DateTime.Now:hh:mm:ss.FFF}, {newValue}\n");
+                LogAndAdd(outfile, $"{DateTime.Now:hh:mm:ss.FFF}, {newValue}\n");
             }
 
             //await Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
