@@ -5,6 +5,8 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <Configurations>Debug;Release;Stable</Configurations>
+    <StartupObject>BLEWinForms.Program</StartupObject>
+    <ApplicationIcon>Dapino-Medical-Heart-beat-no-sh.ico</ApplicationIcon>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
