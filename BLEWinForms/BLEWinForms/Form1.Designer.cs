@@ -155,10 +155,11 @@ namespace BLEWinForms
             this.groupBox3.Size = new System.Drawing.Size(233, 315);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Marker Settings";
             // 
             // udpPortBox
             // 
-            this.udpPortBox.Location = new System.Drawing.Point(6, 64);
+            this.udpPortBox.Location = new System.Drawing.Point(6, 68);
             this.udpPortBox.Margin = new System.Windows.Forms.Padding(2);
             this.udpPortBox.Name = "udpPortBox";
             this.udpPortBox.Size = new System.Drawing.Size(178, 35);
@@ -167,7 +168,7 @@ namespace BLEWinForms
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(2, 31);
+            this.label2.Location = new System.Drawing.Point(2, 38);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(156, 30);
