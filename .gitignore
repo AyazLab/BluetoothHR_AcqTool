@@ -7,3 +7,5 @@
 */bin/**
 /bin/
 *.pdb
+BLEStable/netcoreapp3.0/BLEWinForms.deps.json
+BLEStable/netcoreapp3.0/BLEWinForms.runtimeconfig.dev.json
