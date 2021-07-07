@@ -18,7 +18,7 @@ namespace BLEWinForms
             FileName = fileName;
             try
             {
-                PCsvFile = new StreamWriter(FileName, false);
+                PCsvFile = new StreamWriter(FileName, true);
             }
             catch (Exception ex)
             {
@@ -62,7 +62,8 @@ namespace BLEWinForms
                 outStr = outStr + Delimeter+str;
             }
 
-            PCsvFile.WriteLine(outStr);
+            PCsvFile.Write(outStr);
+            PCsvFile.Flush();
 
 
             bRowInProgress = false;
