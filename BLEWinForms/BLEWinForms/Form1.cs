@@ -570,8 +570,8 @@ namespace BLEWinForms
                             }
                             string filename = "hrvData_" + subjectNumberBox.Text + "_" + DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString("00") + DateTime.Now.Day.ToString("00") + "_" + DateTime.Now.Hour.ToString("00") + DateTime.Now.Minute.ToString("00") + DateTime.Now.Second.ToString("00") + ".csv";
                             outfile = new Logging(Path.Combine(subFolderPath, filename), ",");
-                            WriteHeader(outfile);
-                            //LogAndAdd(outfile, "Time, DataType, Value\n");
+                            //WriteHeader(outfile);
+                            LogAndAdd(outfile, "Time, DataType, Value\n");
                             int.TryParse(udpPortBox.Text, out udpPortNo);
                             udpListener = new UDPListener(udpPortNo);
                             udpListener.NewMessageReceived += delegate (object o, MyMessageArgs msgData)
