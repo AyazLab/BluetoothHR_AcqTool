@@ -6,7 +6,7 @@ using System;
 namespace BLEWinForms{
     class UDPListener
     {
-        private int m_portToListen = 5501;
+        private int m_portToListen = 5508;
         private volatile bool listening;
         Thread m_ListeningThread;
         public event EventHandler<MyMessageArgs> NewMessageReceived;
@@ -60,7 +60,7 @@ namespace BLEWinForms{
             try
             {
                 listener = new UdpClient(m_portToListen);
-                listener.ExclusiveAddressUse = false;
+                //listener.ExclusiveAddressUse = false;
             }
             catch (SocketException)
             {
