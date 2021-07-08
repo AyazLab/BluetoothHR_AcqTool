@@ -20,6 +20,7 @@ namespace BLEWinForms{
         {
             this.listening = false;
             writeToFile = null;
+            
         }
 
         public UDPListener(int m_portToListen)
@@ -27,6 +28,7 @@ namespace BLEWinForms{
             this.m_portToListen = m_portToListen;
             this.listening = false;
             writeToFile = null;
+            
         }
 
         public void SetWriteToFile(Logging _writeToFileRef)
@@ -58,6 +60,7 @@ namespace BLEWinForms{
             try
             {
                 listener = new UdpClient(m_portToListen);
+                listener.ExclusiveAddressUse = false;
             }
             catch (SocketException)
             {
