@@ -811,9 +811,9 @@ namespace BLEWinForms
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            udpPortBox.Text = "5501";
+            udpPortBox.Text = "5508";
             int.TryParse(udpPortBox.Text, out udpPortNo);
-            udpListener = new UDPListener(udpPortNo);
+            //udpListener = new UDPListener(udpPortNo);
         }
 
         private void groupBox2_Enter(object sender, EventArgs e)
