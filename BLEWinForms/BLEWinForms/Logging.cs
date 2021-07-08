@@ -38,7 +38,14 @@ namespace BLEWinForms
         }
 
 
-
+        public void WriteHeader()
+        {
+            bRowInProgress = true;
+            string outStr = "ElapsedTime" + Delimeter + "MRK" + Delimeter + "SystemTime" + Delimeter + "HR";
+            PCsvFile.Write(outStr);
+            PCsvFile.Flush();
+            bRowInProgress = false;
+        }
         public void WriteData(string str)
         {
             bRowInProgress = true;
