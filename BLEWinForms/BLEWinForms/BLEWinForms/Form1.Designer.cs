@@ -35,20 +35,20 @@ namespace BLEWinForms
             this.deviceListView = new System.Windows.Forms.ComboBox();
             this.connectButton = new System.Windows.Forms.Button();
             this.scanButton = new System.Windows.Forms.Button();
+            this.statusStrip = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.udpPortBox = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.outputHistoryBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.streamButton = new System.Windows.Forms.Button();
             this.subjectNumberBox = new System.Windows.Forms.TextBox();
-            this.statusStrip = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.udpPortBox = new System.Windows.Forms.TextBox();
-            this.outputHistoryBox = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -127,6 +127,41 @@ namespace BLEWinForms
             this.scanButton.UseVisualStyleBackColor = true;
             this.scanButton.Click += new System.EventHandler(this.scanButton_Click);
             // 
+            // statusStrip
+            // 
+            this.statusStrip.AutoSize = true;
+            this.tableLayoutPanel1.SetColumnSpan(this.statusStrip, 2);
+            this.statusStrip.Location = new System.Drawing.Point(3, 779);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(0, 41);
+            this.statusStrip.TabIndex = 5;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.udpPortBox);
+            this.groupBox3.Controls.Add(this.label2);
+            this.groupBox3.Location = new System.Drawing.Point(3, 219);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(330, 430);
+            this.groupBox3.TabIndex = 3;
+            this.groupBox3.TabStop = false;
+            // 
+            // udpPortBox
+            // 
+            this.udpPortBox.Location = new System.Drawing.Point(9, 87);
+            this.udpPortBox.Name = "udpPortBox";
+            this.udpPortBox.Size = new System.Drawing.Size(250, 47);
+            this.udpPortBox.TabIndex = 1;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(3, 43);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(222, 41);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Enter UDP Port:";
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.outputHistoryBox);
@@ -141,6 +176,16 @@ namespace BLEWinForms
             this.groupBox2.TabStop = false;
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
+            // outputHistoryBox
+            // 
+            this.outputHistoryBox.Enabled = false;
+            this.outputHistoryBox.Location = new System.Drawing.Point(32, 217);
+            this.outputHistoryBox.Multiline = true;
+            this.outputHistoryBox.Name = "outputHistoryBox";
+            this.outputHistoryBox.Size = new System.Drawing.Size(1000, 304);
+            this.outputHistoryBox.TabIndex = 4;
+            this.outputHistoryBox.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -153,7 +198,6 @@ namespace BLEWinForms
             // 
             // streamButton
             // 
-            this.streamButton.Enabled = false;
             this.streamButton.Location = new System.Drawing.Point(32, 138);
             this.streamButton.Name = "streamButton";
             this.streamButton.Size = new System.Drawing.Size(264, 58);
@@ -169,54 +213,9 @@ namespace BLEWinForms
             this.subjectNumberBox.Size = new System.Drawing.Size(155, 47);
             this.subjectNumberBox.TabIndex = 0;
             // 
-            // statusStrip
-            // 
-            this.statusStrip.AutoSize = true;
-            this.tableLayoutPanel1.SetColumnSpan(this.statusStrip, 2);
-            this.statusStrip.Location = new System.Drawing.Point(3, 779);
-            this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(0, 41);
-            this.statusStrip.TabIndex = 5;
-            // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.udpPortBox);
-            this.groupBox3.Controls.Add(this.label2);
-            this.groupBox3.Location = new System.Drawing.Point(3, 219);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(330, 430);
-            this.groupBox3.TabIndex = 3;
-            this.groupBox3.TabStop = false;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 43);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(222, 41);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Enter UDP Port:";
-            // 
-            // udpPortBox
-            // 
-            this.udpPortBox.Location = new System.Drawing.Point(9, 87);
-            this.udpPortBox.Name = "udpPortBox";
-            this.udpPortBox.Size = new System.Drawing.Size(250, 47);
-            this.udpPortBox.TabIndex = 1;
-            // 
-            // outputHistoryBox
-            // 
-            this.outputHistoryBox.Enabled = false;
-            this.outputHistoryBox.Location = new System.Drawing.Point(32, 217);
-            this.outputHistoryBox.Multiline = true;
-            this.outputHistoryBox.Name = "outputHistoryBox";
-            this.outputHistoryBox.Size = new System.Drawing.Size(1000, 304);
-            this.outputHistoryBox.TabIndex = 4;
-            this.outputHistoryBox.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // Form1
             // 
@@ -231,10 +230,10 @@ namespace BLEWinForms
             this.tableLayoutPanel1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }

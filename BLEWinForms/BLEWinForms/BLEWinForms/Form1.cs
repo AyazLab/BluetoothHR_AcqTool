@@ -57,6 +57,7 @@ namespace BLEWinForms
         readonly int E_DEVICE_NOT_AVAILABLE = unchecked((int)0x800710df); // HRESULT_FROM_WIN32(ERROR_DEVICE_NOT_AVAILABLE)
         #endregion
 
+        private BackgroundWorker backgroundWorker = new BackgroundWorker();
         private DeviceWatcher deviceWatcher;
 
         #region UI Code
@@ -120,6 +121,9 @@ namespace BLEWinForms
                 // Stop the watcher.
                 deviceWatcher.Stop();
                 deviceWatcher = null;
+
+                KnownDevices.Clear();
+                UnknownDevices.Clear();
             }
         }
 
@@ -410,6 +414,9 @@ namespace BLEWinForms
             {
                 statusStrip.Text = "Bluetooth radio is not on.";
             }
+            catch (Exception ex) {
+                statusStrip.Text = "Error connecting to device: " + ex.Message;
+            }
 
             if (bluetoothLeDevice != null)
             {
@@ -487,7 +494,7 @@ namespace BLEWinForms
                         {
                             connectionLabel.Text = "Connected";
                             connectionLabel.ForeColor = Color.Green;
-                            streamButton.Enabled = true;
+                            groupBox2.Enabled = true;
                             selectedCharacteristic = hr_char;
                         }
                     }
@@ -501,16 +508,32 @@ namespace BLEWinForms
                     statusStrip.Text = "Device unreachable";
                     connectionLabel.Text = "Disconnected";
                     connectionLabel.ForeColor = Color.Red;
-                    streamButton.Enabled = false;
+                    groupBox2.Enabled = false;
                 }
             }
             connectButton.Enabled = true;
         }
+
+        delegate void SetTextCallback(string text);
+
+        private void SetText(string text) {
+            if (this.outputHistoryBox.InvokeRequired)
+            {
+                SetTextCallback d = new SetTextCallback(SetText);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                this.outputHistoryBox.AppendText(text + "\r\n");
+            }
+        }
+
         private void AddText(Logging logging, string value)
         {
-            outputHistoryBox.Text += value + "\n";
+            SetText(value);
             logging.WriteData(value);
         }
+
         private async void ToggleStream()
         {
             if (!subscribedForNotifications)
@@ -546,7 +569,7 @@ namespace BLEWinForms
                             }
                             string filename = "hrvData_" + subjectNumberBox.Text + "_" + DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString("00") + DateTime.Now.Day.ToString("00") + "_" + DateTime.Now.Hour.ToString("00") + DateTime.Now.Minute.ToString("00") + DateTime.Now.Second.ToString("00") + ".csv";
                             outfile = new Logging(Path.Combine(subFolderPath, filename), ",");
-                            AddText(outfile, "Time, DataType, Value\n");
+                            AddText(outfile, "Time, DataType, Value, RR interval (optional)\n");
                             int.TryParse(udpPortBox.Text, out udpPortNo);
                             udpListener = new UDPListener(udpPortNo);
                             udpListener.NewMessageReceived += delegate (object o, MyMessageArgs msgData)
@@ -747,11 +770,11 @@ namespace BLEWinForms
             }
             if (!hasRRInterval)
             {
-                return "HR: " + data[1];
+                return "HR, " + data[1] + ",";
             }
             else
             {
-                return "HR: " + data[1] + "\nRR intervals: " + toInterval(data);
+                return "HR, " + data[1] + ", RR intervals: " + toInterval(data);
             }
         }
 
