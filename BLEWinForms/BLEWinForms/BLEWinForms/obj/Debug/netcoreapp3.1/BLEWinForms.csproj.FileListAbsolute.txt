@@ -1,6 +1,0 @@
-C:\Users\ndefi\Coding\BluetoothHRacq\BLEWinForms\BLEWinForms\BLEWinForms\obj\Debug\netcoreapp3.1\BLEWinForms.csprojAssemblyReference.cache
-C:\Users\ndefi\Coding\BluetoothHRacq\BLEWinForms\BLEWinForms\BLEWinForms\obj\Debug\netcoreapp3.1\BLEWinForms.Form1.resources
-C:\Users\ndefi\Coding\BluetoothHRacq\BLEWinForms\BLEWinForms\BLEWinForms\obj\Debug\netcoreapp3.1\BLEWinForms.csproj.GenerateResource.cache
-C:\Users\ndefi\Coding\BluetoothHRacq\BLEWinForms\BLEWinForms\BLEWinForms\obj\Debug\netcoreapp3.1\BLEWinForms.AssemblyInfoInputs.cache
-C:\Users\ndefi\Coding\BluetoothHRacq\BLEWinForms\BLEWinForms\BLEWinForms\obj\Debug\netcoreapp3.1\BLEWinForms.AssemblyInfo.cs
-C:\Users\ndefi\Coding\BluetoothHRacq\BLEWinForms\BLEWinForms\BLEWinForms\obj\Debug\netcoreapp3.1\BLEWinForms.csproj.CoreCompileInputs.cache
