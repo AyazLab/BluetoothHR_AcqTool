@@ -103,6 +103,7 @@ namespace BLEWinForms
             // 
             // deviceListView
             // 
+            this.deviceListView.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.deviceListView.FormattingEnabled = true;
             this.deviceListView.Location = new System.Drawing.Point(23, 34);
             this.deviceListView.Margin = new System.Windows.Forms.Padding(2);
