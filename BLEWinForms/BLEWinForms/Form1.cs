@@ -496,6 +496,7 @@ namespace BLEWinForms
                             connectionLabel.ForeColor = Color.Green;
                             groupBox2.Enabled = true;
                             selectedCharacteristic = hr_char;
+                            streamButton.Enabled = true;
                         }
                     }
                     else

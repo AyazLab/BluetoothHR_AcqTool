@@ -33,13 +33,20 @@ namespace BLEWinForms
         volatile int bWriteMarkerNext = 0;
         public long mrkReceivedTime = 0;
 
+        volatile string markerStr = "";
+
         public void WriteMarker(int inp)
         {
+            while(bRowInProgress)
+            {
+                int x = 1;
+            }
             bWriteMarkerNext = inp;
             string outStr = System.DateTime.Now.Hour + ":" + System.DateTime.Now.Minute + "." + System.DateTime.Now.Second + "." + System.DateTime.Now.Millisecond + Delimeter;
             outStr += outStr + "MRK" + bWriteMarkerNext + Delimeter + "\n";
+            markerStr = markerStr + outStr + "\tUDP\t" + inp + "\n";
             MarkerFile.Write(outStr);
-            PCsvFile.Flush();
+            MarkerFile.Flush();
         }
 
 
@@ -68,6 +75,9 @@ namespace BLEWinForms
             {
                 //outStr=outStr+"MRK" + bWriteMarkerNext + Delimeter+str;
                 bWriteMarkerNext = 0;
+
+                outStr = outStr + markerStr;
+                markerStr = "";
             }
             else
             {
