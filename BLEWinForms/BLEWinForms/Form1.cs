@@ -570,6 +570,8 @@ namespace BLEWinForms
                     if (status == GattCommunicationStatus.Success)
                     {
                         streamButton.Text = "Stop stream";
+                        connectButton.Enabled = false;
+                        deviceListView.Enabled = false;
                         if (!subscribedForNotifications)
                         {
                             var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -626,6 +628,9 @@ namespace BLEWinForms
                     {
                         subscribedForNotifications = false;
                         streamButton.Text = "Start stream";
+
+                        connectButton.Enabled = true;
+                        deviceListView.Enabled = true;
                         if (subscribedForNotifications)
                         {
                             registeredCharacteristic.ValueChanged -= Characteristic_ValueChanged;
@@ -804,7 +809,7 @@ namespace BLEWinForms
 
         private void label1_Click(object sender, EventArgs e)
         {
-            //outfile.WriteMarker(1);
+            
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -832,7 +837,7 @@ namespace BLEWinForms
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-
+            
         }
     }
 }
