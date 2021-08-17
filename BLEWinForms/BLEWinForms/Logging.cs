@@ -19,14 +19,15 @@ namespace BLEWinForms
             FileName = fileName;
             try
             {
-                PCsvFile = new StreamWriter(FileName, true);
-                MarkerFile = new StreamWriter(FileName + "Markers", true);
+                PCsvFile = new StreamWriter(FileName + ".csv", true);
+                MarkerFile = new StreamWriter(FileName + "_Markers.csv", true);
             }
             catch (Exception ex)
             {
                 //MessageBox.Show(ex.Message, "Save to CSV",
                 //    MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+            WriteHeader();
         }
 
         volatile bool bRowInProgress = false;
@@ -43,19 +44,24 @@ namespace BLEWinForms
             }
             bWriteMarkerNext = inp;
             string outStr = System.DateTime.Now.Hour + ":" + System.DateTime.Now.Minute + "." + System.DateTime.Now.Second + "." + System.DateTime.Now.Millisecond + Delimeter;
-            outStr += outStr + "MRK" + bWriteMarkerNext + Delimeter + "\n";
+            outStr += "MRK" + bWriteMarkerNext + Delimeter + "\n";
             markerStr = markerStr + outStr + "\tUDP\t" + inp + "\n";
             MarkerFile.Write(outStr);
             MarkerFile.Flush();
         }
 
 
-        public void WriteHeader()
+        public void WriteHeader(string subject, string app_version, string device_name)
         {
             bRowInProgress = true;
-            string outStr = "ElapsedTime" + Delimeter + "MRK" + Delimeter + "SystemTime" + Delimeter + "HR";
+            string date = System.DateTime.Now.Hour + ":" + System.DateTime.Now.Minute + "." + System.DateTime.Now.Second + "." + System.DateTime.Now.Millisecond + Delimeter;
+            string outStr = "Subject: " + subject + Delimeter + "Time: " + date + Delimeter + "Version: " + app_version + Delimeter + "Device: " + device_name + "\n";
+            outStr += "Time, DataType, Value\n";
             PCsvFile.Write(outStr);
             PCsvFile.Flush();
+            outStr = "ElapsedTime" + Delimeter + "MRK" + "\n";
+            MarkerFile.Write(outStr);
+            MarkerFile.Flush();
             bRowInProgress = false;
         }
         public void WriteData(string str)
@@ -64,14 +70,14 @@ namespace BLEWinForms
 
             string outStr = System.DateTime.Now.Hour + ":" + System.DateTime.Now.Minute + "." + System.DateTime.Now.Second + "." + System.DateTime.Now.Millisecond + Delimeter;
 
-            
+
 
             //for (int i = 0; i < data.Length; i++)
             //{
             //   PCsvFile.Write(str + Delimeter);
             //}
 
-            if (bWriteMarkerNext > 0)
+            /*if (bWriteMarkerNext > 0)
             {
                 //outStr=outStr+"MRK" + bWriteMarkerNext + Delimeter+str;
                 bWriteMarkerNext = 0;
@@ -82,7 +88,8 @@ namespace BLEWinForms
             else
             {
                 outStr = outStr + Delimeter+str;
-            }
+            }*/
+            outStr += Delimeter + str;
 
             PCsvFile.Write(outStr);
             PCsvFile.Flush();

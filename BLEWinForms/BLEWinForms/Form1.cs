@@ -532,11 +532,6 @@ namespace BLEWinForms
             }
         }
 
-        private void WriteHeader(Logging logging)
-        {
-            logging.WriteHeader();
-            AddText("Time,Value");
-        }
         private void LogAndAdd(Logging logging, string value)
         {
             logging.WriteData(value);
@@ -579,10 +574,10 @@ namespace BLEWinForms
                             if (!Directory.Exists(subFolderPath)) {
                                 Directory.CreateDirectory(subFolderPath);
                             }
-                            string filename = "hrvData_" + subjectNumberBox.Text + "_" + DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString("00") + DateTime.Now.Day.ToString("00") + "_" + DateTime.Now.Hour.ToString("00") + DateTime.Now.Minute.ToString("00") + DateTime.Now.Second.ToString("00") + ".csv";
+                            string filename = "hrvData_" + subjectNumberBox.Text + "_" + DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString("00") + DateTime.Now.Day.ToString("00") + "_" + DateTime.Now.Hour.ToString("00") + DateTime.Now.Minute.ToString("00") + DateTime.Now.Second.ToString("00");
                             outfile = new Logging(Path.Combine(subFolderPath, filename), ",");
-                            //WriteHeader(outfile);
-                            LogAndAdd(outfile, "Time, DataType, Value\n");
+                            outfile.WriteHeader(subjectNumberBox.Text, "v1.0", deviceListView.Text);
+                            
                             int.TryParse(udpPortBox.Text, out udpPortNo);
                             udpListener = new UDPListener(udpPortNo);
                             udpListener.NewMessageReceived += delegate (object o, MyMessageArgs msgData)
