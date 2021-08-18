@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 
@@ -9,6 +10,7 @@ namespace BLEWinForms
     {
         private StreamWriter PCsvFile = null;
         private StreamWriter MarkerFile = null;
+        private Stopwatch stopwatch;
         private String FileName;
         private String Delimeter = ",";
         private Boolean FirstWrite = true;
@@ -17,6 +19,7 @@ namespace BLEWinForms
         {
             Delimeter = delimeter;
             FileName = fileName;
+            stopwatch = new Stopwatch();
             try
             {
                 PCsvFile = new StreamWriter(FileName + ".csv", true);
@@ -27,7 +30,6 @@ namespace BLEWinForms
                 //MessageBox.Show(ex.Message, "Save to CSV",
                 //    MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            WriteHeader();
         }
 
         volatile bool bRowInProgress = false;
@@ -44,6 +46,7 @@ namespace BLEWinForms
             }
             bWriteMarkerNext = inp;
             string outStr = System.DateTime.Now.Hour + ":" + System.DateTime.Now.Minute + "." + System.DateTime.Now.Second + "." + System.DateTime.Now.Millisecond + Delimeter;
+            outStr += stopwatch.ElapsedMilliseconds + Delimeter;
             outStr += "MRK" + bWriteMarkerNext + Delimeter + "\n";
             markerStr = markerStr + outStr + "\tUDP\t" + inp + "\n";
             MarkerFile.Write(outStr);
@@ -53,13 +56,15 @@ namespace BLEWinForms
 
         public void WriteHeader(string subject, string app_version, string device_name)
         {
+            stopwatch.Start();
             bRowInProgress = true;
-            string date = System.DateTime.Now.Hour + ":" + System.DateTime.Now.Minute + "." + System.DateTime.Now.Second + "." + System.DateTime.Now.Millisecond + Delimeter;
-            string outStr = "Subject: " + subject + Delimeter + "Time: " + date + Delimeter + "Version: " + app_version + Delimeter + "Device: " + device_name + "\n";
-            outStr += "Time, DataType, Value\n";
+            string date = System.DateTime.Now.Hour + ":" + System.DateTime.Now.Minute + "." + System.DateTime.Now.Second + "." + System.DateTime.Now.Millisecond;
+            string headerinfo = "Subject: " + subject + Delimeter + " Time: " + date + Delimeter + " Version: " + app_version + Delimeter + " Device: " + device_name + "\n";
+            string outStr = headerinfo + "System Time, Elapsed Time (ms), DataType, Value\n";
             PCsvFile.Write(outStr);
             PCsvFile.Flush();
-            outStr = "ElapsedTime" + Delimeter + "MRK" + "\n";
+            outStr = headerinfo;
+            outStr += "System Time, Elapsed Time (ms), MRK" + "\n";
             MarkerFile.Write(outStr);
             MarkerFile.Flush();
             bRowInProgress = false;
@@ -67,9 +72,9 @@ namespace BLEWinForms
         public void WriteData(string str)
         {
             bRowInProgress = true;
-
+            long elapsedTime = stopwatch.ElapsedMilliseconds;
             string outStr = System.DateTime.Now.Hour + ":" + System.DateTime.Now.Minute + "." + System.DateTime.Now.Second + "." + System.DateTime.Now.Millisecond + Delimeter;
-
+            outStr += elapsedTime + Delimeter;
 
 
             //for (int i = 0; i < data.Length; i++)
@@ -89,7 +94,7 @@ namespace BLEWinForms
             {
                 outStr = outStr + Delimeter+str;
             }*/
-            outStr += Delimeter + str;
+            outStr += str;
 
             PCsvFile.Write(outStr);
             PCsvFile.Flush();

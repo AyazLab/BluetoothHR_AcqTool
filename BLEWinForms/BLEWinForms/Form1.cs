@@ -658,7 +658,7 @@ namespace BLEWinForms
 
             if (outfile != null)
             {
-                LogAndAdd(outfile, $"{DateTime.Now:hh:mm:ss.FFF}, {newValue}\n");
+                LogAndAdd(outfile, $"{newValue}\n");
             }
 
             //await Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
