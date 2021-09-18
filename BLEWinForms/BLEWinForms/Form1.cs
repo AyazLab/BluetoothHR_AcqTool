@@ -19,6 +19,8 @@ using System.Windows.Forms;
 using SDKTemplate;
 using System.Threading.Tasks;
 using System.IO;
+using ZedGraph;
+
 
 namespace BLEWinForms
 {
@@ -287,6 +289,8 @@ namespace BLEWinForms
 
         #endregion
 
+        PointPairList hrValues = new PointPairList();
+
         private void scanButton_Click(object sender, EventArgs e)
         {
             if (deviceWatcher == null)
@@ -398,6 +402,7 @@ namespace BLEWinForms
             {
                 statusStrip.Text = "Error: Unable to reset state, try again.";
                 connectButton.Enabled = true;
+                enableRecordUI(false);
                 return;
             }
 
@@ -408,14 +413,17 @@ namespace BLEWinForms
                 if (bluetoothLeDevice == null)
                 {
                     statusStrip.Text = "Failed to connect to device.";
+                    enableRecordUI(false);
                 }
             }
             catch (Exception ex) when (ex.HResult == E_DEVICE_NOT_AVAILABLE)
             {
                 statusStrip.Text = "Bluetooth radio is not on.";
+                enableRecordUI(false);
             }
             catch (Exception ex) {
                 statusStrip.Text = "Error connecting to device: " + ex.Message;
+                enableRecordUI(false);
             }
 
             if (bluetoothLeDevice != null)
@@ -459,6 +467,7 @@ namespace BLEWinForms
 
                                     // On error, act as if there are no characteristics.
                                     characteristics = new List<GattCharacteristic>();
+                                    enableRecordUI(false);
                                 }
                             }
                             else
@@ -468,6 +477,7 @@ namespace BLEWinForms
 
                                 // On error, act as if there are no characteristics.
                                 characteristics = new List<GattCharacteristic>();
+                                enableRecordUI(false);
 
                             }
                         }
@@ -476,6 +486,7 @@ namespace BLEWinForms
                             statusStrip.Text = "Restricted service. Can't read characteristics: " + ex.Message;
                             // On error, act as if there are no characteristics.
                             characteristics = new List<GattCharacteristic>();
+                            enableRecordUI(false);
                         }
 
                         GattCharacteristic hr_char = null;
@@ -489,56 +500,131 @@ namespace BLEWinForms
                         if (hr_char == null)
                         {
                             statusStrip.Text = "Device does not have Heart Rate Measurement Characteristic";
+                            
+                            enableRecordUI(false);
                         }
                         else
                         {
-                            connectionLabel.Text = "Connected";
-                            connectionLabel.ForeColor = Color.Green;
-                            groupBox2.Enabled = true;
+                            
                             selectedCharacteristic = hr_char;
-                            streamButton.Enabled = true;
+                            enableRecordUI(true);
+
                         }
                     }
                     else
                     {
                         statusStrip.Text = "Device does not have Heart Rate service";
+                        enableRecordUI(false);
                     }
                 }
                 else
                 {
                     statusStrip.Text = "Device unreachable";
-                    connectionLabel.Text = "Disconnected";
-                    connectionLabel.ForeColor = Color.Red;
-                    groupBox2.Enabled = false;
+                    enableRecordUI(false);
+                    
                 }
             }
             connectButton.Enabled = true;
         }
 
+        private void enableRecordUI(bool enable)
+        {
+            if(enable)
+            {
+                connectionLabel.Text = "Connected";
+                connectionLabel.ForeColor = Color.Green;
+                groupBox2.Enabled = true;
+                streamButton.Enabled = true;
+            }   
+            else
+            { 
+                connectionLabel.Text = "Disconnected";
+                connectionLabel.ForeColor = Color.Red;
+                groupBox2.Enabled = false;
+                streamButton.Enabled = false;
+                connectButton.Enabled = true;
+            }
+        }
+
         private delegate void SafeCallDelegate(string value);
+        private delegate void SafeCallDelegateInt(int value);
         private void AddText(string value)
         {
             
-            if (outputHistoryBox.InvokeRequired)
+            if (outputText.InvokeRequired)
             {
                 var d = new SafeCallDelegate(AddText);
-                outputHistoryBox.Invoke(d, new object[] { value });
+                outputText.Invoke(d, new object[] { value });
             }
             else
             {
                 string str = value + "\r\n";
-                outputHistoryBox.AppendText(str);
+                outputText.AppendText(str);
                
             }
         }
+
+        int lastVal = 0;
 
         private void LogAndAdd(Logging logging, string value)
         {
             logging.WriteData(value);
             AddText(value);
-            
+
+            int hrValue;
+            if(value.Length>2)
+            {
+                string[] stringParts = value.Split(',');
+                if(stringParts[0]=="HR")
+                { 
+                    int.TryParse(stringParts[1], out hrValue);
+                    updateGraph(hrValue);
+                }
+
+            }
         }
 
+        private void updateGraph(int value)
+        {
+            if (zedGraph1.InvokeRequired)
+            {
+                var d = new SafeCallDelegateInt(updateGraph);
+                zedGraph1.Invoke(d, new object[] { value });
+
+                
+            }
+            else
+            {
+               
+                IPointListEdit ip = zedGraph1.GraphPane.CurveList["HR"].Points as IPointListEdit;
+                if (ip != null)
+                {
+                    if(lastVal==-1)
+                    {
+                        ip.Clear();
+                    }
+                    if(ip.Count>30)
+                    {
+                        ip.RemoveAt(0);
+                    }
+
+                    lastVal = value;
+
+                    double x = outfile.stopwatch.ElapsedMilliseconds / 1000.0 ;
+                    double y = value;
+                    ip.Add(x, y);
+                    zedGraph1.AxisChange();
+                    zedGraph1.Refresh();
+                }
+
+            }
+            
+                
+
+        }
+
+
+        
         private async void ToggleStream()
         {
             if (!subscribedForNotifications)
@@ -564,7 +650,7 @@ namespace BLEWinForms
 
                     if (status == GattCommunicationStatus.Success)
                     {
-                        streamButton.Text = "Stop stream";
+                        streamButton.Text = "Stop Recording";
                         connectButton.Enabled = false;
                         deviceListView.Enabled = false;
                         if (!subscribedForNotifications)
@@ -595,6 +681,8 @@ namespace BLEWinForms
                             registeredCharacteristic = selectedCharacteristic;
                             registeredCharacteristic.ValueChanged += Characteristic_ValueChanged;
                             subscribedForNotifications = true;
+
+                            
                         }
                         statusStrip.Text = "Successfully subscribed for value changes";
                     }
@@ -622,7 +710,7 @@ namespace BLEWinForms
                     if (result == GattCommunicationStatus.Success)
                     {
                         subscribedForNotifications = false;
-                        streamButton.Text = "Start stream";
+                        streamButton.Text = "Record";
 
                         connectButton.Enabled = true;
                         deviceListView.Enabled = true;
@@ -814,7 +902,8 @@ namespace BLEWinForms
 
         private void streamButton_Click(object sender, EventArgs e)
         {
-            outputHistoryBox.Text = "";
+            outputText.Text = "";
+            lastVal = -1;
             ToggleStream();
         }
 
@@ -823,6 +912,18 @@ namespace BLEWinForms
             udpPortBox.Text = "5508";
             int.TryParse(udpPortBox.Text, out udpPortNo);
             //udpListener = new UDPListener(udpPortNo);
+
+            GraphPane myPane = zedGraph1.GraphPane;
+            // Set the titles and axis labels
+            myPane.Title.Text = "Heart Rate";
+            myPane.XAxis.Title.Text = "Time";
+            myPane.YAxis.Title.Text = "Heart Rate (bpm)";
+            myPane.YAxis.Scale.Min = 40;
+            myPane.YAxis.Scale.Max = 110;
+            myPane.YAxis.MajorGrid.IsVisible = true;
+            //myPane.YAxis.Scale = 10;
+            myPane.AddCurve("HR", hrValues, Color.Red, SymbolType.Circle);
+
         }
 
         private void groupBox2_Enter(object sender, EventArgs e)
@@ -833,6 +934,11 @@ namespace BLEWinForms
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             
+        }
+
+        private void streamButton_Click_1(object sender, EventArgs e)
+        {
+            streamButton_Click( sender,  e);
         }
     }
 }

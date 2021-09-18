@@ -10,7 +10,7 @@ namespace BLEWinForms
     {
         private StreamWriter PCsvFile = null;
         private StreamWriter MarkerFile = null;
-        private Stopwatch stopwatch;
+        public Stopwatch stopwatch;
         private String FileName;
         private String Delimeter = ",";
         private Boolean FirstWrite = true;
@@ -58,7 +58,7 @@ namespace BLEWinForms
         {
             stopwatch.Start();
             bRowInProgress = true;
-            string date = System.DateTime.Now.Hour + ":" + System.DateTime.Now.Minute + "." + System.DateTime.Now.Second + "." + System.DateTime.Now.Millisecond;
+            string date = System.DateTime.Now.Hour + ":" + System.DateTime.Now.Minute + ":" + System.DateTime.Now.Second + "." + System.DateTime.Now.Millisecond;
             string headerinfo = "Subject: " + subject + Delimeter + " Time: " + date + Delimeter + " Version: " + app_version + Delimeter + " Device: " + device_name + "\n";
             string outStr = headerinfo + "System Time, Elapsed Time (ms), DataType, Value\n";
             PCsvFile.Write(outStr);
@@ -73,7 +73,7 @@ namespace BLEWinForms
         {
             bRowInProgress = true;
             long elapsedTime = stopwatch.ElapsedMilliseconds;
-            string outStr = System.DateTime.Now.Hour + ":" + System.DateTime.Now.Minute + "." + System.DateTime.Now.Second + "." + System.DateTime.Now.Millisecond + Delimeter;
+            string outStr = System.DateTime.Now.Hour + ":" + System.DateTime.Now.Minute + ":" + System.DateTime.Now.Second + "." + System.DateTime.Now.Millisecond + Delimeter;
             outStr += elapsedTime + Delimeter;
 
 
