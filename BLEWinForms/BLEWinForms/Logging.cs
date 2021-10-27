@@ -47,6 +47,7 @@ namespace BLEWinForms
             bWriteMarkerNext = inp;
             string outStr = System.DateTime.Now.Hour + ":" + System.DateTime.Now.Minute + "." + System.DateTime.Now.Second + "." + System.DateTime.Now.Millisecond + Delimeter;
             outStr += stopwatch.ElapsedMilliseconds + Delimeter;
+            outStr += Stopwatch.GetTimestamp() + Delimeter;
             outStr += "MRK" + bWriteMarkerNext + Delimeter + "\n";
             markerStr = markerStr + outStr + "\tUDP\t" + inp + "\n";
             MarkerFile.Write(outStr);
@@ -60,11 +61,11 @@ namespace BLEWinForms
             bRowInProgress = true;
             string date = System.DateTime.Now.Hour + ":" + System.DateTime.Now.Minute + ":" + System.DateTime.Now.Second + "." + System.DateTime.Now.Millisecond;
             string headerinfo = "Subject: " + subject + Delimeter + " Time: " + date + Delimeter + " Version: " + app_version + Delimeter + " Device: " + device_name + "\n";
-            string outStr = headerinfo + "System Time, Elapsed Time (ms), DataType, Value\n";
+            string outStr = headerinfo + "SystemTime, ElapsedTime, QPC_time, DataType, Value\n";
             PCsvFile.Write(outStr);
             PCsvFile.Flush();
             outStr = headerinfo;
-            outStr += "System Time, Elapsed Time (ms), MRK" + "\n";
+            outStr += "SystemTime, ElapsedTime, QPC_time, MRK" + "\n";
             MarkerFile.Write(outStr);
             MarkerFile.Flush();
             bRowInProgress = false;
@@ -75,6 +76,7 @@ namespace BLEWinForms
             long elapsedTime = stopwatch.ElapsedMilliseconds;
             string outStr = System.DateTime.Now.Hour + ":" + System.DateTime.Now.Minute + ":" + System.DateTime.Now.Second + "." + System.DateTime.Now.Millisecond + Delimeter;
             outStr += elapsedTime + Delimeter;
+            outStr += Stopwatch.GetTimestamp() + Delimeter;
 
 
             //for (int i = 0; i < data.Length; i++)
