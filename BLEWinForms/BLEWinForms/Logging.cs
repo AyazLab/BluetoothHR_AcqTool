@@ -45,7 +45,7 @@ namespace BLEWinForms
                 int x = 1;
             }
             bWriteMarkerNext = inp;
-            string outStr = System.DateTime.Now.Hour + ":" + System.DateTime.Now.Minute + "." + System.DateTime.Now.Second + "." + System.DateTime.Now.Millisecond + Delimeter;
+            string outStr = System.DateTime.Now.Hour + ":" + System.DateTime.Now.Minute + ":" + System.DateTime.Now.Second + "." + System.DateTime.Now.Millisecond + Delimeter;
             outStr += stopwatch.ElapsedMilliseconds + Delimeter;
             outStr += Stopwatch.GetTimestamp() + Delimeter;
             outStr += "MRK" + bWriteMarkerNext + Delimeter + "\n";
