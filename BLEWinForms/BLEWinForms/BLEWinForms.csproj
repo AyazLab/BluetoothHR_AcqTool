@@ -7,7 +7,7 @@
     <Configurations>Debug;Release;Stable</Configurations>
     <StartupObject>BLEWinForms.Program</StartupObject>
     <ApplicationIcon>Dapino-Medical-Heart-beat-no-sh.ico</ApplicationIcon>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <PackageId>BluetoothHR_AcqTool</PackageId>
     <Authors>Adrian Curtin, Niclas DeFellipis</Authors>
     <Company>Drexel University</Company>
