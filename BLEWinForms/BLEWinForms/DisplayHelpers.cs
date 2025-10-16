@@ -4,7 +4,6 @@ using System.ComponentModel;
 using Windows.Devices.Bluetooth.GenericAttributeProfile;
 using Windows.Devices.Enumeration;
 using Windows.Storage.Streams;
-using Windows.UI.Xaml.Media.Imaging;
 
 namespace SDKTemplate
 {
@@ -94,7 +93,8 @@ namespace SDKTemplate
 
         public IReadOnlyDictionary<string, object> Properties => DeviceInformation.Properties;
 
-        public BitmapImage GlyphBitmapImage { get; private set; }
+        // Commented out - UWP-specific type not used in WinForms
+        // public BitmapImage GlyphBitmapImage { get; private set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -113,6 +113,8 @@ namespace SDKTemplate
             //UpdateGlyphBitmapImage();
         }
 
+        // Commented out - UWP-specific BitmapImage not used in WinForms
+        /*
         private async void UpdateGlyphBitmapImage()
         {
             DeviceThumbnail deviceThumbnail = await DeviceInformation.GetGlyphThumbnailAsync();
@@ -121,6 +123,7 @@ namespace SDKTemplate
             GlyphBitmapImage = glyphBitmapImage;
             OnPropertyChanged("GlyphBitmapImage");
         }
+        */
 
         protected void OnPropertyChanged(string name)
         {
